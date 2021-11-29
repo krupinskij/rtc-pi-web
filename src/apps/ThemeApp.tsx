@@ -1,13 +1,19 @@
 import React from 'react';
 import { createTheme } from '@mui/material/styles';
-import { green, pink } from '@mui/material/colors';
+import { green, pink, grey } from '@mui/material/colors';
 import { ThemeProvider } from '@mui/system';
 
 const theme = createTheme({
   palette: {
     primary: green,
     secondary: pink,
+    grey: {
+      ...grey,
+      800: '#1a1a1a',
+      900: '#090909',
+    },
   },
+  spacing: (factor: number) => `${0.25 * factor}rem`,
 });
 
 const ThemeApp: React.FC = ({ children }) => {

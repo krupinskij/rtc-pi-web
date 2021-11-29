@@ -1,13 +1,7 @@
 import Layout from '../components/common/Layout';
-import Navbar from '../components/common/Navbar';
 
 const LayoutApp: React.FC = ({ children }) => {
-  return (
-    <Layout>
-      <Navbar />
-      {children}
-    </Layout>
-  );
+  return <Layout>{children}</Layout>;
 };
 
 export default LayoutApp;
