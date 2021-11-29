@@ -1,12 +1,11 @@
 import Layout from '../components/common/Layout';
 import Navbar from '../components/common/Navbar';
-import RouterApp from './RouterApp';
 
-const LayoutApp = () => {
+const LayoutApp: React.FC = ({ children }) => {
   return (
     <Layout>
       <Navbar />
-      <RouterApp />
+      {children}
     </Layout>
   );
 };

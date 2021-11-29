@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import DashboardPage from '../pages/DashboardPage';
@@ -5,7 +6,7 @@ import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 
-const RouterApp = () => {
+const RouterApp: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
