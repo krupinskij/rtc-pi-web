@@ -1,6 +1,7 @@
 import { TextField as MaterialTextField, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { Field as FinalField } from 'react-final-form';
+import { useField } from 'react-final-form';
 
 interface Props {
   label: string;
@@ -12,12 +13,23 @@ interface GenericProps extends Props {
 }
 
 const Field = ({ label, name, type }: GenericProps) => {
+  const { input, meta } = useField(name);
   return (
-    <FinalField name={name}>
-      {(props: any) => (
-        <FieldWrapper type={type} label={label} variant="filled" color="secondary" focused />
-      )}
-    </FinalField>
+    <FieldWrapper
+      type={type}
+      label={label}
+      name={name}
+      value={input.value}
+      onChange={input.onChange}
+      onBlur={input.onBlur}
+      onFocus={input.onFocus}
+      error={meta.touched && !!meta.error}
+      helperText={meta.touched && meta.error}
+      required={true}
+      variant="filled"
+      color="secondary"
+      focused
+    />
   );
 };
 

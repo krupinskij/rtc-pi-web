@@ -1,21 +1,36 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Theme } from '@mui/material';
-import { styled } from '@mui/system';
 import { Form as FinalForm } from 'react-final-form';
+import { setIn } from 'final-form';
+import { AnyObjectSchema } from 'yup';
 
 interface Props {
   children: React.ReactNode;
-  onSubmit: () => void;
+  validationSchema: AnyObjectSchema;
+  onSubmit: (value: any) => void;
 }
 
-const Form = ({ children, onSubmit }: Props) => {
+const validateFormValues = (schema: AnyObjectSchema) => async (values: any) => {
+  try {
+    await schema.validate(values, { abortEarly: false });
+  } catch (err: any) {
+    const errors = err.inner.reduce((formError: any, innerError: any) => {
+      return setIn(formError, innerError.path, innerError.message);
+    }, {});
+
+    return errors;
+  }
+};
+
+const Form = ({ children, validationSchema, onSubmit }: Props) => {
+  const validate = validateFormValues(validationSchema);
+
   return (
     <Card elevation={12}>
       <CardContent>
-        <FinalForm onSubmit={onSubmit}>
-          {(props: any) => <form onSubmit={props.handleSubmit}>{children}</form>}
+        <FinalForm validate={validate} onSubmit={onSubmit}>
+          {({ handleSubmit }) => <form onSubmit={handleSubmit}>{children}</form>}
         </FinalForm>
       </CardContent>
     </Card>

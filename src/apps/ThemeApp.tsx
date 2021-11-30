@@ -20,6 +20,9 @@ const theme = createTheme({
     info: {
       main: '#ed6802',
     },
+    error: {
+      main: '#e54343',
+    },
   },
   spacing: (factor: number) => `${0.25 * factor}rem`,
   typography: {
