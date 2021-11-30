@@ -1,7 +1,7 @@
 import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { TextField, PasswordField } from '../../components/Form/Field';
-import Form, { FormActions, FormFields, FormTitle } from '../../components/Form';
+import Form, { FormActions, FormFields, FormLink, FormTitle } from '../../components/Form';
 
 const LoginPage = () => {
   const onSubmit = () => {
@@ -19,9 +19,10 @@ const LoginPage = () => {
           </FormFields>
           <FormActions>
             <Button type="submit" variant="contained" size="large">
-              Large
+              Zaloguj się
             </Button>
           </FormActions>
+          <FormLink prefix="Nie masz jeszcze konta?" text="Zarejestuj się" to="/register" />
         </Form>
       </FormWrapper>
     </PageWrapper>
@@ -38,6 +39,6 @@ const PageWrapper = styled('main')<{ theme?: Theme }>(
 
 const FormWrapper = styled('div')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(0, 80)};
+    margin: ${theme.spacing(0, 100)};
   `
 );

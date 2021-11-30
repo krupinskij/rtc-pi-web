@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <NavbarWrapper position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
+        <Typography variant="h6" component="div">
           RaspRTC
         </Typography>
       </Toolbar>
@@ -20,7 +20,6 @@ const NavbarWrapper = styled(AppBar)<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
     height: ${theme.spacing(16)};
 
-    color: white;
-    background-color: ${theme.palette.grey[800]};
+    background-color: ${theme.palette.background.paper};
   `
 );

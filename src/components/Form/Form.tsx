@@ -12,21 +12,14 @@ interface Props {
 
 const Form = ({ children, onSubmit }: Props) => {
   return (
-    <FormWrapper>
+    <Card elevation={12}>
       <CardContent>
         <FinalForm onSubmit={onSubmit}>
           {(props: any) => <form onSubmit={props.handleSubmit}>{children}</form>}
         </FinalForm>
       </CardContent>
-    </FormWrapper>
+    </Card>
   );
 };
 
 export default Form;
-
-const FormWrapper = styled(Card)<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    color: white;
-    background-color: ${theme.palette.grey[800]};
-  `
-);

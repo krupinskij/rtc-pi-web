@@ -15,7 +15,7 @@ const Field = ({ label, name, type }: GenericProps) => {
   return (
     <FinalField name={name}>
       {(props: any) => (
-        <FieldWrapper type={type} label={label} variant="filled" color="info" focused />
+        <FieldWrapper type={type} label={label} variant="filled" color="secondary" focused />
       )}
     </FinalField>
   );
@@ -33,8 +33,8 @@ const FieldWrapper = styled(MaterialTextField)<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
     margin: ${theme.spacing(4, 2)};
     
-    && input {
-      color: white;
+    & input {
+      font-size: 1.25rem;
     }
   `
 );

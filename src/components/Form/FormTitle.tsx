@@ -9,7 +9,7 @@ interface Props {
 const FormTitle = ({ children }: Props) => {
   return (
     <TitledWrapper>
-      <Typography style={{ color: 'white' }} variant="h4" component="h2">
+      <Typography align="center" variant="h3" component="h2">
         {children}
       </Typography>
     </TitledWrapper>
