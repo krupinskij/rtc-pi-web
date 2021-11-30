@@ -5,8 +5,13 @@ import { ThemeProvider } from '@mui/system';
 
 const theme = createTheme({
   palette: {
-    primary: green,
+    primary: {
+      main: '#21521e',
+    },
     secondary: pink,
+    info: {
+      main: '#ddd',
+    },
     grey: {
       ...grey,
       800: '#1a1a1a',

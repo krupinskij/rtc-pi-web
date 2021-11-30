@@ -1,18 +1,28 @@
-import { Theme, Typography } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
+import { TextField, PasswordField } from '../../components/Form/Field';
+import Form, { FormActions, FormFields, FormTitle } from '../../components/Form';
 
 const LoginPage = () => {
+  const onSubmit = () => {
+    console.log('Submit');
+  };
+
   return (
     <PageWrapper>
       <FormWrapper>
-        <CardContent>
-          <Typography gutterBottom variant="h4" component="h2">
-            Zaloguj się
-          </Typography>
-          <Typography variant="body2">Zaloguj się</Typography>
-        </CardContent>
+        <Form onSubmit={onSubmit}>
+          <FormTitle>Zaloguj się</FormTitle>
+          <FormFields>
+            <TextField label="Login" name="field1" />
+            <PasswordField label="Hasło" name="field2" />
+          </FormFields>
+          <FormActions>
+            <Button type="submit" variant="contained" size="large">
+              Large
+            </Button>
+          </FormActions>
+        </Form>
       </FormWrapper>
     </PageWrapper>
   );
@@ -26,11 +36,8 @@ const PageWrapper = styled('main')<{ theme?: Theme }>(
   `
 );
 
-const FormWrapper = styled(Card)<{ theme?: Theme }>(
+const FormWrapper = styled('div')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
-  
     margin: ${theme.spacing(0, 80)};
-    color: white;
-    background-color: ${theme.palette.grey[800]};
   `
 );
