@@ -1,16 +1,19 @@
-import { Theme, Toolbar, Typography } from '@mui/material';
+import { Button, Theme, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/system';
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+import AuthPanel from './components/AuthPanel';
+import NotAuthPanel from './components/NotAuthPanel';
 
 const Navbar = () => {
   return (
     <NavbarWrapper position="static">
       <Toolbar>
         <LogoIcon fontSize="large" />
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           RTC<LogoSpan>Pi</LogoSpan>
         </Typography>
+        <NotAuthPanel />
       </Toolbar>
     </NavbarWrapper>
   );

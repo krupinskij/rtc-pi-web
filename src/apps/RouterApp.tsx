@@ -1,22 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import DashboardPage from '../pages/DashboardPage';
-import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-
-const RouterApp: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+const RouterApp: React.FC = ({ children }) => {
+  return <BrowserRouter>{children}</BrowserRouter>;
 };
 
 export default RouterApp;

@@ -5,6 +5,7 @@ import Form, { FormActions, FormFields, FormLink, FormTitle } from '../../compon
 import * as yup from 'yup';
 
 const registerValidationSchema = yup.object().shape({
+  username: yup.string().required('To pole jest wymagane'),
   email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
   password: yup
     .string()
@@ -28,6 +29,7 @@ const RegisterPage = () => {
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <FormTitle>Zarejestruj się</FormTitle>
           <FormFields>
+            <TextField label="Nazwa użytkownika" name="username" />
             <TextField label="Email" name="email" />
             <PasswordField label="Hasło" name="password" />
             <PasswordField label="Powtórz hasło" name="repeatPassword" />
