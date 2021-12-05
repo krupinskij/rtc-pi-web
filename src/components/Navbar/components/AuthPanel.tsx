@@ -1,13 +1,23 @@
-import { Button, Theme } from '@mui/material';
+import { Button, Theme, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { useNavigate } from 'react-router';
 import useAuth from '../../../auth/useAuth';
 
 const AuthPanel = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <AuthPanelWrapper>
-      {user?.email}
-      <Button color="inherit" onClick={() => logout()}>
+      <Button color="inherit">Mój profil</Button>
+      <Button color="inherit">Panel sterowania</Button>
+      <Button color="inherit">Dodaj kamerę</Button>
+      <Button color="inherit" onClick={() => onLogout()}>
         Wyloguj się
       </Button>
     </AuthPanelWrapper>

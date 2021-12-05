@@ -8,87 +8,67 @@ import { useRecoilState } from 'recoil';
 import { userState } from './state';
 const useAuth = (): {
   user: User | null;
+  checkUser: () => void;
   login: (loginInput: LoginInput) => Promise<void>;
-  register: (registerInput: RegisterInput) => void;
+  register: (registerInput: RegisterInput) => Promise<void>;
   logout: () => void;
 } => {
   const [user, setUser] = useRecoilState<User | null>(userState);
   const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const login = async (loginInput: LoginInput) => {
-    try {
-      const response = await axios.post<Token>('http://localhost:3030/api/auth/login', loginInput);
-      const token = response.data.token;
+  const checkUser = () => {
+    const token = cookies.get('Authorization');
 
-      cookies.set('Authorization', `Bearer ${token}`);
-
-      const { exp, iat, ...newUser } = jwtDecode<UserFromToken>(token);
-
-      const timeout = exp * 1000 - Date.now();
-      timeoutRef.current = setTimeout(() => refresh(), timeout * 0.9);
-
-      setUser(newUser);
-    } catch (error) {
-      console.log(error);
+    if (token) {
+      consumeToken(token);
     }
+  };
+
+  const login = async (loginInput: LoginInput) => {
+    const response = await axios.post<Token>('http://localhost:3030/api/auth/login', loginInput);
+    const token = response.data.token;
+
+    consumeToken(token);
   };
 
   const register = async (registerInput: RegisterInput) => {
-    try {
-      const response = await axios.post<Token>(
-        'http://localhost:3030/api/auth/register',
-        registerInput
-      );
-      const token = response.data.token;
+    const response = await axios.post<Token>(
+      'http://localhost:3030/api/auth/register',
+      registerInput
+    );
+    const token = response.data.token;
 
-      cookies.set('Authorization', `Bearer ${token}`);
-
-      const { exp, iat, ...newUser } = jwtDecode<UserFromToken>(token);
-
-      const timeout = exp * 1000 - Date.now();
-      timeoutRef.current = setTimeout(() => refresh(), timeout * 0.9);
-
-      setUser(newUser);
-    } catch (error) {
-      console.log(error);
-    }
+    consumeToken(token);
   };
 
   const refresh = async () => {
-    try {
-      const response = await axios.post<Token>(
-        'http://localhost:3030/api/auth/refresh',
-        {},
-        {
-          headers: {
-            Authorization: cookies.get('Authorization') || '',
-          },
-        }
-      );
-      const token = response.data.token;
+    const response = await axios.post<Token>('http://localhost:3030/api/auth/refresh');
+    const token = response.data.token;
 
-      cookies.set('Authorization', `Bearer ${token}`);
+    consumeToken(token);
+  };
 
-      const { exp, iat, ...newUser } = jwtDecode<UserFromToken>(token);
+  const consumeToken = (token: string) => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    cookies.set('Authorization', token);
 
-      const timeout = exp * 1000 - Date.now();
-      timeoutRef.current = setTimeout(() => refresh(), timeout * 0.9);
+    const { exp, iat, ...newUser } = jwtDecode<UserFromToken>(token);
 
-      setUser(newUser);
-    } catch (error) {
-      console.log(error);
-    }
+    const timeout = exp * 1000 - Date.now();
+    timeoutRef.current = setTimeout(() => refresh(), timeout * 0.9);
+
+    setUser(newUser);
   };
 
   const logout = () => {
-    cookies.remove('authorization');
+    cookies.remove('Authorization');
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     setUser(null);
   };
 
-  return { user, login, register, logout };
+  return { user, checkUser, login, register, logout };
 };
 
 export default useAuth;

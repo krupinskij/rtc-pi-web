@@ -6,6 +6,7 @@ import AuthPanel from './components/AuthPanel';
 import NotAuthPanel from './components/NotAuthPanel';
 
 import useAuth from '../../auth/useAuth';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -13,7 +14,7 @@ const Navbar = () => {
     <NavbarWrapper position="static">
       <Toolbar>
         <LogoIcon fontSize="large" />
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h5" sx={{ flexGrow: 1 }}>
           RTC<LogoSpan>Pi</LogoSpan>
         </Typography>
         {!!user ? <AuthPanel /> : <NotAuthPanel />}

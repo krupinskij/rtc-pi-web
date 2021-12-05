@@ -5,6 +5,7 @@ import Form, { FormActions, FormFields, FormLink, FormTitle } from '../../compon
 import * as yup from 'yup';
 import useAuth from '../../auth/useAuth';
 import { LoginInput } from '../../auth/model';
+import { useNavigate } from 'react-router';
 
 const loginValidationSchema = yup.object().shape({
   email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
@@ -16,10 +17,12 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const LoginPage = () => {
-  const { user, login } = useAuth();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const onSubmit = async (loginInput: LoginInput) => {
     await login(loginInput);
-    console.log('dupa', user);
+    navigate('/dashboard');
   };
 
   return (
