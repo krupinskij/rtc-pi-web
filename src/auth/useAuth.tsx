@@ -1,11 +1,12 @@
-import { useRef } from 'react';
-import { LoginInput, RegisterInput, Token, User, UserFromToken } from './model';
 import axios from 'axios';
-
 import cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
+
+import { LoginInput, RegisterInput, Token, User, UserFromToken } from './model';
 import { userState } from './state';
+
 const useAuth = (): {
   user: User | null;
   checkUser: () => void;

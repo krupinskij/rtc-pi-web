@@ -1,7 +1,7 @@
 import React from 'react';
-import { RouteProps, Route, Navigate } from 'react-router';
+import { Navigate } from 'react-router';
 
-import useAuth from '../../auth/useAuth';
+import useAuth from 'auth/useAuth';
 
 const AuthRoute: React.FC = ({ children }) => {
   const { user } = useAuth();

@@ -1,6 +1,5 @@
 import { TextField as MaterialTextField, Theme } from '@mui/material';
 import { styled } from '@mui/system';
-import { Field as FinalField } from 'react-final-form';
 import { useField } from 'react-final-form';
 
 interface Props {
