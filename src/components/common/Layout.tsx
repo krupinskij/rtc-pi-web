@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 
 const Layout: React.FC = ({ children }) => {
   return (

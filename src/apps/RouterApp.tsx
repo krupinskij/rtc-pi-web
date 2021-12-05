@@ -1,22 +1,15 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import useAuth from '../auth/useAuth';
 
-import DashboardPage from '../pages/DashboardPage';
-import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
+const RouterApp: React.FC = ({ children }) => {
+  const { checkUser } = useAuth();
 
-const RouterApp: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  return <BrowserRouter>{children}</BrowserRouter>;
 };
 
 export default RouterApp;

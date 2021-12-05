@@ -3,8 +3,12 @@ import { styled } from '@mui/system';
 import { TextField, PasswordField } from '../../components/Form/Field';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from '../../components/Form';
 import * as yup from 'yup';
+import useAuth from '../../auth/useAuth';
+import { useNavigate } from 'react-router';
+import { RegisterInput } from '../../auth/model';
 
 const registerValidationSchema = yup.object().shape({
+  username: yup.string().required('To pole jest wymagane'),
   email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
   password: yup
     .string()
@@ -18,8 +22,12 @@ const registerValidationSchema = yup.object().shape({
 });
 
 const RegisterPage = () => {
-  const onSubmit = (value: any) => {
-    console.log('Submit', value);
+  const { register } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (registerInput: RegisterInput) => {
+    await register(registerInput);
+    navigate('/dashboard');
   };
 
   return (
@@ -28,6 +36,7 @@ const RegisterPage = () => {
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <FormTitle>Zarejestruj się</FormTitle>
           <FormFields>
+            <TextField label="Nazwa użytkownika" name="username" />
             <TextField label="Email" name="email" />
             <PasswordField label="Hasło" name="password" />
             <PasswordField label="Powtórz hasło" name="repeatPassword" />
