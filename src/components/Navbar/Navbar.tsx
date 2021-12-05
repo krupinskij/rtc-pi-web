@@ -1,12 +1,12 @@
+import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import { Theme, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/system';
-import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+
+import useAuth from 'auth/useAuth';
+
 import AuthPanel from './components/AuthPanel';
 import NotAuthPanel from './components/NotAuthPanel';
-
-import useAuth from '../../auth/useAuth';
-import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { user } = useAuth();
