@@ -8,7 +8,7 @@ const RouterApp: React.FC = ({ children }) => {
 
   useEffect(() => {
     checkUser();
-  }, []);
+  }, [checkUser]);
 
   return <BrowserRouter>{children}</BrowserRouter>;
 };

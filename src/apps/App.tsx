@@ -1,3 +1,4 @@
+import 'axiosConfig';
 import React from 'react';
 
 import LayoutApp from './LayoutApp';
