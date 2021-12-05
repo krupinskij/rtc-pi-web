@@ -1,10 +1,11 @@
-import { Button, Theme, Typography } from '@mui/material';
+import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router';
-import useAuth from '../../../auth/useAuth';
+
+import useAuth from 'auth/useAuth';
 
 const AuthPanel = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const onLogout = () => {

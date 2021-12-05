@@ -1,11 +1,12 @@
 import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
-import { TextField, PasswordField } from '../../components/Form/Field';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from '../../components/Form';
-import * as yup from 'yup';
-import useAuth from '../../auth/useAuth';
-import { LoginInput } from '../../auth/model';
 import { useNavigate } from 'react-router';
+import * as yup from 'yup';
+
+import { LoginInput } from 'auth/model';
+import useAuth from 'auth/useAuth';
+import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
+import { TextField, PasswordField } from 'components/Form/Field';
 
 const loginValidationSchema = yup.object().shape({
   email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),

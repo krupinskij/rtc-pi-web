@@ -1,11 +1,12 @@
-import { useRef } from 'react';
-import { LoginInput, RegisterInput, Token, User, UserFromToken } from './model';
 import axios from 'axios';
-
 import cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
+
+import { LoginInput, RegisterInput, Token, User, UserFromToken } from './model';
 import { userState } from './state';
+
 const useAuth = (): {
   user: User | null;
   checkUser: () => void;
@@ -25,24 +26,21 @@ const useAuth = (): {
   };
 
   const login = async (loginInput: LoginInput) => {
-    const response = await axios.post<Token>('http://localhost:3030/api/auth/login', loginInput);
+    const response = await axios.post<Token>('/auth/login', loginInput);
     const token = response.data.token;
 
     consumeToken(token);
   };
 
   const register = async (registerInput: RegisterInput) => {
-    const response = await axios.post<Token>(
-      'http://localhost:3030/api/auth/register',
-      registerInput
-    );
+    const response = await axios.post<Token>('/auth/register', registerInput);
     const token = response.data.token;
 
     consumeToken(token);
   };
 
   const refresh = async () => {
-    const response = await axios.post<Token>('http://localhost:3030/api/auth/refresh');
+    const response = await axios.post<Token>('/auth/refresh');
     const token = response.data.token;
 
     consumeToken(token);
