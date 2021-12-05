@@ -1,10 +1,15 @@
 import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
+import useAuth from '../../../auth/useAuth';
 
 const AuthPanel = () => {
+  const { user, logout } = useAuth();
   return (
     <AuthPanelWrapper>
-      <Button color="inherit">Wyloguj się</Button>
+      {user?.email}
+      <Button color="inherit" onClick={() => logout()}>
+        Wyloguj się
+      </Button>
     </AuthPanelWrapper>
   );
 };
