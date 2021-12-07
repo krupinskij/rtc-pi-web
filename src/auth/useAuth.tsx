@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 
 import { loginUser, logoutUser, refreshToken, registerUser } from './authService';
 import { LoginInput, RegisterInput, User } from './model';
-import { isLoggedState, userState } from './state';
+import { userState } from './state';
 
 const useAuth = (): {
   user: User | null;
