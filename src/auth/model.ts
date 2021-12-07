@@ -1,5 +1,6 @@
-export type Token = {
-  token: string;
+export type Tokens = {
+  accessToken: string;
+  csrfToken: string;
 };
 
 export type User = {
