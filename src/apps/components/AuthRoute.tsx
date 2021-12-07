@@ -4,9 +4,9 @@ import { Navigate } from 'react-router';
 import useAuth from 'auth/useAuth';
 
 const AuthRoute: React.FC = ({ children }) => {
-  const { user } = useAuth();
+  const { isLogged } = useAuth();
 
-  return !!user ? <>{children}</> : <Navigate to="/login" />;
+  return isLogged ? <>{children}</> : <Navigate to="/login" />;
 };
 
 export default AuthRoute;

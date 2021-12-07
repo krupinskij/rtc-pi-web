@@ -1,87 +1,56 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { LoginInput, RegisterInput, Tokens, User, UserFromToken } from './model';
-import { userState } from './state';
+import { loginUser, logoutUser, refreshToken, registerUser } from './authService';
+import { LoginInput, RegisterInput, User } from './model';
+import { isLoggedState, userState } from './state';
 
 const useAuth = (): {
   user: User | null;
+  isLogged: boolean;
   checkUser: () => void;
   login: (loginInput: LoginInput) => Promise<void>;
   register: (registerInput: RegisterInput) => Promise<void>;
   logout: () => void;
 } => {
   const [user, setUser] = useRecoilState<User | null>(userState);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const [isLogged, setIsLogged] = useRecoilState(isLoggedState);
 
   const login = async (loginInput: LoginInput) => {
-    const response = await axios.post<Tokens>('/auth/login', loginInput);
-    const { accessToken, csrfToken } = response.data;
+    const user = await loginUser(loginInput);
 
-    consumeAccessToken(accessToken);
-    setCsrfToken(csrfToken);
+    setIsLogged(true);
+    setUser(user);
   };
 
   const register = async (registerInput: RegisterInput) => {
-    const response = await axios.post<Tokens>('/auth/register', registerInput);
-    const { accessToken, csrfToken } = response.data;
+    const user = await registerUser(registerInput);
 
-    consumeAccessToken(accessToken);
-    setCsrfToken(csrfToken);
-  };
-
-  const refresh = async () => {
-    const response = await axios.post<Tokens>('/auth/refresh');
-    const { accessToken, csrfToken } = response.data;
-
-    consumeAccessToken(accessToken);
-    setCsrfToken(csrfToken);
-  };
-
-  const consumeAccessToken = (accessToken: string) => {
-    const { exp, iat, ...newUser } = jwtDecode<UserFromToken>(accessToken);
-
-    const timeout = exp * 1000 - Date.now();
-    timeoutRef.current = setTimeout(() => refresh(), timeout * 0.9);
-
-    setUser(newUser);
-  };
-
-  const setCsrfToken = (csrfToken: string) => {
-    axios.defaults.headers.common['X-Csrf-Token'] = csrfToken;
-    sessionStorage.setItem('csrf-token', csrfToken);
+    setIsLogged(true);
+    setUser(user);
   };
 
   const logout = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    delete axios.defaults.headers.common['X-Csrf-Token'];
-    sessionStorage.removeItem('csrf-token');
+    logoutUser();
+    setIsLogged(false);
     setUser(null);
   };
 
   const checkUser = useCallback(async () => {
-    const csrfTokenFromStorage = sessionStorage.getItem('csrf-token');
-    if (csrfTokenFromStorage) {
-      axios.defaults.headers.common['X-Csrf-Token'] = csrfTokenFromStorage;
+    const csrfToken = sessionStorage.getItem('csrf-token');
+
+    if (!csrfToken) {
+      setIsLogged(false);
+      return;
     }
 
-    const response = await axios.post<Tokens>('/auth/refresh');
-    const { accessToken, csrfToken } = response.data;
-
-    const { exp, iat, ...newUser } = jwtDecode<UserFromToken>(accessToken);
-
-    const timeout = exp * 1000 - Date.now();
-    timeoutRef.current = setTimeout(() => refresh(), timeout * 0.9);
-
     axios.defaults.headers.common['X-Csrf-Token'] = csrfToken;
-    sessionStorage.setItem('csrf-token', csrfToken);
-  }, []);
+    const user = await refreshToken();
+    setUser(user);
+  }, [setUser, setIsLogged]);
 
-  return { user, checkUser, login, register, logout };
+  return { user, isLogged, checkUser, login, register, logout };
 };
 
 export default useAuth;

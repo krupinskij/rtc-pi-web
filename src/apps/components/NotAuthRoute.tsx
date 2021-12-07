@@ -4,9 +4,9 @@ import { Navigate } from 'react-router';
 import useAuth from 'auth/useAuth';
 
 const NotAuthRoute: React.FC = ({ children }) => {
-  const { user } = useAuth();
+  const { isLogged } = useAuth();
 
-  return !user ? <>{children}</> : <Navigate to="/" />;
+  return !isLogged ? <>{children}</> : <Navigate to="/" />;
 };
 
 export default NotAuthRoute;

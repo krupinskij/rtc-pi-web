@@ -9,7 +9,7 @@ import AuthPanel from './components/AuthPanel';
 import NotAuthPanel from './components/NotAuthPanel';
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { isLogged } = useAuth();
   return (
     <NavbarWrapper position="static">
       <Toolbar>
@@ -17,7 +17,7 @@ const Navbar = () => {
         <Typography variant="h5" sx={{ flexGrow: 1 }}>
           RTC<LogoSpan>Pi</LogoSpan>
         </Typography>
-        {!!user ? <AuthPanel /> : <NotAuthPanel />}
+        {isLogged ? <AuthPanel /> : <NotAuthPanel />}
       </Toolbar>
     </NavbarWrapper>
   );
