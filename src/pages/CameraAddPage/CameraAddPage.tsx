@@ -7,6 +7,7 @@ import { LoginInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
+import { FormWrapper } from 'components/common/styled';
 
 const addValidationSchema = yup.object().shape({
   email: yup
@@ -26,40 +27,26 @@ const CameraAddPage = () => {
   };
 
   return (
-    <PageWrapper>
-      <FormWrapper>
-        <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Dodaj istniejącą kamerę</FormTitle>
-          <FormFields>
-            <TextField label="Kod" name="code" />
-            <PasswordField label="Hasło" name="password" />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Dodaj kamerę
-            </Button>
-          </FormActions>
-          <FormLink
-            prefix="Chcesz dodać nową kamerę?"
-            text="Zarejestruj nową kamerę"
-            to="/camera/register"
-          />
-        </Form>
-      </FormWrapper>
-    </PageWrapper>
+    <FormWrapper>
+      <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
+        <FormTitle>Dodaj istniejącą kamerę</FormTitle>
+        <FormFields>
+          <TextField label="Kod" name="code" />
+          <PasswordField label="Hasło" name="password" />
+        </FormFields>
+        <FormActions>
+          <Button type="submit" variant="contained" size="large">
+            Dodaj kamerę
+          </Button>
+        </FormActions>
+        <FormLink
+          prefix="Chcesz dodać nową kamerę?"
+          text="Zarejestruj nową kamerę"
+          to="/camera/register"
+        />
+      </Form>
+    </FormWrapper>
   );
 };
 
 export default CameraAddPage;
-
-const PageWrapper = styled('main')<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(8, 4)};
-  `
-);
-
-const FormWrapper = styled('div')<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(0, 100)};
-  `
-);

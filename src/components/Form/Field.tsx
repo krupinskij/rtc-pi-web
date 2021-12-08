@@ -45,7 +45,12 @@ const FieldWrapper = styled(MaterialTextField)<{ theme?: Theme }>(
     margin: ${theme.spacing(4, 2)};
     
     & input {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
+    }
+
+    & label {
+      font-size: 1.25rem;    
+      top: -5px;
     }
   `
 );

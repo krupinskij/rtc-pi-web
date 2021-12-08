@@ -8,7 +8,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <LayoutWrapper>
       <Navbar />
-      {children}
+      <PageWrapper>{children}</PageWrapper>
     </LayoutWrapper>
   );
 };
@@ -21,5 +21,11 @@ const LayoutWrapper = styled('div')<{ theme?: Theme }>(
     height: 100vh;
     display: flex;
     flex-direction: column;
+  `
+);
+
+const PageWrapper = styled('main')<{ theme?: Theme }>(
+  ({ theme }: { theme: Theme }) => `
+    margin: ${theme.spacing(8, 4)};
   `
 );
