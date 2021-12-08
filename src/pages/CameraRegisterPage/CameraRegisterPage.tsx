@@ -1,5 +1,7 @@
 import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
+import { useEffect, useState } from 'react';
+import { useMutation, useQueries } from 'react-query';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
@@ -8,6 +10,9 @@ import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
 import { FormWrapper } from 'components/common/styled';
+
+import { CameraCode, CameraRegisterInput, CameraRegisterRepeatedInput } from './model';
+import { registerCamera } from './queries';
 
 const registerValidationSchema = yup.object().shape({
   password: yup
@@ -22,8 +27,16 @@ const registerValidationSchema = yup.object().shape({
 });
 
 const CameraRegisterPage = () => {
-  const onSubmit = async (registerInput: RegisterInput) => {
-    console.log('Super!!!!');
+  const [code, setCode] = useState<CameraCode>();
+  const { mutate: register, data: cameraCode } = useMutation(registerCamera);
+
+  useEffect(() => {
+    console.log(cameraCode);
+  }, [cameraCode]);
+
+  const onSubmit = async (cameraRRInput: CameraRegisterRepeatedInput) => {
+    const { repeatedPassword, ...cameraRInput } = cameraRRInput;
+    register(cameraRInput);
   };
 
   return (
