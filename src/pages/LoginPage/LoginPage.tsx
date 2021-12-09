@@ -6,7 +6,7 @@ import { LoginInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
-import { FormWrapper } from 'components/common/styled';
+import { ContentWrapper } from 'components/common/styled';
 
 const loginValidationSchema = yup.object().shape({
   email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
@@ -27,7 +27,7 @@ const LoginPage = () => {
   };
 
   return (
-    <FormWrapper>
+    <ContentWrapper>
       <Form validationSchema={loginValidationSchema} onSubmit={onSubmit}>
         <FormTitle>Zaloguj się</FormTitle>
         <FormFields>
@@ -41,7 +41,7 @@ const LoginPage = () => {
         </FormActions>
         <FormLink prefix="Nie masz jeszcze konta?" text="Zarejestuj się" to="/register" />
       </Form>
-    </FormWrapper>
+    </ContentWrapper>
   );
 };
 

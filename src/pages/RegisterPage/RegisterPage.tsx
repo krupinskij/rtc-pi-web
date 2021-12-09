@@ -6,7 +6,7 @@ import { RegisterInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
-import { FormWrapper } from 'components/common/styled';
+import { ContentWrapper } from 'components/common/styled';
 
 const registerValidationSchema = yup.object().shape({
   username: yup.string().required('To pole jest wymagane'),
@@ -32,7 +32,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <FormWrapper>
+    <ContentWrapper>
       <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
         <FormTitle>Zarejestruj się</FormTitle>
         <FormFields>
@@ -48,7 +48,7 @@ const RegisterPage = () => {
         </FormActions>
         <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
       </Form>
-    </FormWrapper>
+    </ContentWrapper>
   );
 };
 

@@ -1,13 +1,10 @@
-import { Button, Theme } from '@mui/material';
-import { styled } from '@mui/system';
-import { useNavigate } from 'react-router';
+import { Button } from '@mui/material';
 import * as yup from 'yup';
 
 import { LoginInput } from 'auth/model';
-import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
-import { FormWrapper } from 'components/common/styled';
+import { ContentWrapper } from 'components/common/styled';
 
 const addValidationSchema = yup.object().shape({
   email: yup
@@ -27,7 +24,7 @@ const CameraAddPage = () => {
   };
 
   return (
-    <FormWrapper>
+    <ContentWrapper>
       <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
         <FormTitle>Dodaj istniejącą kamerę</FormTitle>
         <FormFields>
@@ -45,7 +42,7 @@ const CameraAddPage = () => {
           to="/camera/register"
         />
       </Form>
-    </FormWrapper>
+    </ContentWrapper>
   );
 };
 

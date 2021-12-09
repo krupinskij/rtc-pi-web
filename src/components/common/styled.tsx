@@ -1,9 +1,19 @@
-import { Theme } from '@mui/material';
+import { Card, CardContent, Theme } from '@mui/material';
 import { styled } from '@mui/system';
+import React from 'react';
 
-export const FormWrapper = styled('div')<{ theme?: Theme }>(
+export const ContentWrapper = styled('div')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
     width: clamp(400px, 40%, 700px);
     margin: auto;
+    margin-bottom: ${theme.spacing(4)};
   `
 );
+
+export const ContentBody: React.FC = ({ children }) => {
+  return (
+    <Card>
+      <CardContent>{children}</CardContent>
+    </Card>
+  );
+};

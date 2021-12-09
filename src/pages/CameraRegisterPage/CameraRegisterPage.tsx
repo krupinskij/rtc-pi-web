@@ -1,17 +1,15 @@
-import { Button, Theme } from '@mui/material';
-import { styled } from '@mui/system';
+import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useMutation, useQueries } from 'react-query';
-import { useNavigate } from 'react-router';
+import { useMutation } from 'react-query';
 import * as yup from 'yup';
 
-import { RegisterInput } from 'auth/model';
-import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
-import { TextField, PasswordField } from 'components/Form/Field';
-import { FormWrapper } from 'components/common/styled';
+import { PasswordField } from 'components/Form/Field';
+import Modal from 'components/Modal';
+import { ContentBody, ContentWrapper } from 'components/common/styled';
 
-import { CameraCode, CameraRegisterInput, CameraRegisterRepeatedInput } from './model';
+import CameraCodeBox from './components/CameraCodeBox';
+import { CameraRegisterRepeatedInput } from './model';
 import { registerCamera } from './queries';
 
 const registerValidationSchema = yup.object().shape({
@@ -27,11 +25,15 @@ const registerValidationSchema = yup.object().shape({
 });
 
 const CameraRegisterPage = () => {
-  const [code, setCode] = useState<CameraCode>();
+  const [code, setCode] = useState<string>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: register, data: cameraCode } = useMutation(registerCamera);
 
   useEffect(() => {
-    console.log(cameraCode);
+    if (cameraCode?.code) {
+      setCode(cameraCode.code);
+      setIsModalOpen(true);
+    }
   }, [cameraCode]);
 
   const onSubmit = async (cameraRRInput: CameraRegisterRepeatedInput) => {
@@ -40,21 +42,33 @@ const CameraRegisterPage = () => {
   };
 
   return (
-    <FormWrapper>
-      <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
-        <FormTitle>Zarejestruj nową kamerę</FormTitle>
-        <FormFields>
-          <PasswordField label="Hasło" name="password" />
-          <PasswordField label="Powtórz hasło" name="repeatPassword" />
-        </FormFields>
-        <FormActions>
-          <Button type="submit" variant="contained" size="large">
-            Zarejestruj kamerę
-          </Button>
-        </FormActions>
-        <FormLink prefix="Chcesz dodać istniejącą kamerę?" text="Dodaj kamerę" to="/camera/add" />
-      </Form>
-    </FormWrapper>
+    <>
+      <ContentWrapper>
+        <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
+          <FormTitle>Zarejestruj nową kamerę</FormTitle>
+          <FormFields>
+            <PasswordField label="Hasło" name="password" />
+            <PasswordField label="Powtórz hasło" name="repeatPassword" />
+          </FormFields>
+          <FormActions>
+            <Button type="submit" variant="contained" size="large">
+              Zarejestruj kamerę
+            </Button>
+          </FormActions>
+          <FormLink prefix="Chcesz dodać istniejącą kamerę?" text="Dodaj kamerę" to="/camera/add" />
+        </Form>
+      </ContentWrapper>
+      {code && !isModalOpen && (
+        <ContentWrapper>
+          <ContentBody>
+            <CameraCodeBox code={code} />
+          </ContentBody>
+        </ContentWrapper>
+      )}
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {!!code && <CameraCodeBox code={code} />}
+      </Modal>
+    </>
   );
 };
 
