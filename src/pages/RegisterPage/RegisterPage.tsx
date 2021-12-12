@@ -36,10 +36,10 @@ const RegisterPage = () => {
       <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
         <FormTitle>Zarejestruj się</FormTitle>
         <FormFields>
-          <TextField label="Nazwa użytkownika" name="username" />
-          <TextField label="Email" name="email" />
-          <PasswordField label="Hasło" name="password" />
-          <PasswordField label="Powtórz hasło" name="repeatPassword" />
+          <TextField label="Nazwa użytkownika" name="username" required />
+          <TextField label="Email" name="email" required />
+          <PasswordField label="Hasło" name="password" required />
+          <PasswordField label="Powtórz hasło" name="repeatPassword" required />
         </FormFields>
         <FormActions>
           <Button type="submit" variant="contained" size="large">

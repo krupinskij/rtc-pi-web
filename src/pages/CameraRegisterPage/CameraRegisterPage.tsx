@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import * as yup from 'yup';
 
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
-import { PasswordField } from 'components/Form/Field';
+import { PasswordField, TextField } from 'components/Form/Field';
 import Modal from 'components/Modal';
 import { ContentBody, ContentWrapper } from 'components/common/styled';
 
@@ -13,6 +13,10 @@ import { CameraRegisterRepeatedInput } from './model';
 import { registerCamera } from './queries';
 
 const registerValidationSchema = yup.object().shape({
+  name: yup
+    .string()
+    .max(50, 'Nazwa kamery powinna mieć co najwyżej 50 znaków')
+    .required('To pole jest wymagane'),
   password: yup
     .string()
     .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
@@ -47,8 +51,9 @@ const CameraRegisterPage = () => {
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <FormTitle>Zarejestruj nową kamerę</FormTitle>
           <FormFields>
-            <PasswordField label="Hasło" name="password" />
-            <PasswordField label="Powtórz hasło" name="repeatPassword" />
+            <TextField label="Nazwa kamery" name="name" multiline required />
+            <PasswordField label="Hasło" name="password" required />
+            <PasswordField label="Powtórz hasło" name="repeatPassword" required />
           </FormFields>
           <FormActions>
             <Button type="submit" variant="contained" size="large">

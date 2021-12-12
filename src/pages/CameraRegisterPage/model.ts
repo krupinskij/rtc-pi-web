@@ -1,4 +1,5 @@
 export type CameraRegisterInput = {
+  name: string;
   password: string;
 };
 

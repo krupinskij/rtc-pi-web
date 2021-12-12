@@ -34,8 +34,8 @@ const CameraAddPage = () => {
         <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
           <FormTitle>Dodaj istniejącą kamerę</FormTitle>
           <FormFields>
-            <TextField label="Kod" name="code" />
-            <PasswordField label="Hasło" name="password" />
+            <TextField label="Kod" name="code" required />
+            <PasswordField label="Hasło" name="password" required />
           </FormFields>
           <FormActions>
             <Button type="submit" variant="contained" size="large">

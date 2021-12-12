@@ -31,8 +31,8 @@ const LoginPage = () => {
       <Form validationSchema={loginValidationSchema} onSubmit={onSubmit}>
         <FormTitle>Zaloguj się</FormTitle>
         <FormFields>
-          <TextField label="Email" name="email" />
-          <PasswordField label="Hasło" name="password" />
+          <TextField label="Email" name="email" required />
+          <PasswordField label="Hasło" name="password" required />
         </FormFields>
         <FormActions>
           <Button type="submit" variant="contained" size="large">
