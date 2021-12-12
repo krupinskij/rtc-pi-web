@@ -1,16 +1,19 @@
 import { Button } from '@mui/material';
+import { useMutation } from 'react-query';
 import * as yup from 'yup';
 
-import { LoginInput } from 'auth/model';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
 import { ContentWrapper } from 'components/common/styled';
 
+import { CameraAddInput } from './model';
+import { addCamera } from './queries';
+
 const addValidationSchema = yup.object().shape({
-  email: yup
+  code: yup
     .string()
     .required('To pole jest wymagane')
-    .length(8, 'Kod powinien mieć dokładnie 8 znaków'),
+    .length(10, 'Kod powinien mieć dokładnie 10 znaków'),
   password: yup
     .string()
     .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
@@ -19,30 +22,34 @@ const addValidationSchema = yup.object().shape({
 });
 
 const CameraAddPage = () => {
-  const onSubmit = async (loginInput: LoginInput) => {
-    console.log('Super');
+  const { mutate: add } = useMutation(addCamera);
+
+  const onSubmit = async (cameraAddInput: CameraAddInput) => {
+    add(cameraAddInput);
   };
 
   return (
-    <ContentWrapper>
-      <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
-        <FormTitle>Dodaj istniejącą kamerę</FormTitle>
-        <FormFields>
-          <TextField label="Kod" name="code" />
-          <PasswordField label="Hasło" name="password" />
-        </FormFields>
-        <FormActions>
-          <Button type="submit" variant="contained" size="large">
-            Dodaj kamerę
-          </Button>
-        </FormActions>
-        <FormLink
-          prefix="Chcesz dodać nową kamerę?"
-          text="Zarejestruj nową kamerę"
-          to="/camera/register"
-        />
-      </Form>
-    </ContentWrapper>
+    <>
+      <ContentWrapper>
+        <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
+          <FormTitle>Dodaj istniejącą kamerę</FormTitle>
+          <FormFields>
+            <TextField label="Kod" name="code" />
+            <PasswordField label="Hasło" name="password" />
+          </FormFields>
+          <FormActions>
+            <Button type="submit" variant="contained" size="large">
+              Dodaj kamerę
+            </Button>
+          </FormActions>
+          <FormLink
+            prefix="Chcesz dodać nową kamerę?"
+            text="Zarejestruj nową kamerę"
+            to="/camera/register"
+          />
+        </Form>
+      </ContentWrapper>
+    </>
   );
 };
 
