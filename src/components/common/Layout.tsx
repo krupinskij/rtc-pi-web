@@ -18,7 +18,7 @@ export default Layout;
 const LayoutWrapper = styled('div')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
     background-color: ${theme.palette.background.default};
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
   `

@@ -47,6 +47,13 @@ const CameraRegisterPage = () => {
 
   return (
     <>
+      {code && !isModalOpen && (
+        <ContentWrapper>
+          <ContentBody>
+            <CameraCodeBox code={code} />
+          </ContentBody>
+        </ContentWrapper>
+      )}
       <ContentWrapper>
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <FormTitle>Zarejestruj nową kamerę</FormTitle>
@@ -63,13 +70,6 @@ const CameraRegisterPage = () => {
           <FormLink prefix="Chcesz dodać istniejącą kamerę?" text="Dodaj kamerę" to="/camera/add" />
         </Form>
       </ContentWrapper>
-      {code && !isModalOpen && (
-        <ContentWrapper>
-          <ContentBody>
-            <CameraCodeBox code={code} />
-          </ContentBody>
-        </ContentWrapper>
-      )}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {!!code && <CameraCodeBox code={code} />}
       </Modal>
