@@ -1,5 +1,4 @@
-import { Button, Theme } from '@mui/material';
-import { styled } from '@mui/system';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
@@ -7,6 +6,7 @@ import { RegisterInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
+import { ContentWrapper } from 'components/common/styled';
 
 const registerValidationSchema = yup.object().shape({
   username: yup.string().required('To pole jest wymagane'),
@@ -32,38 +32,24 @@ const RegisterPage = () => {
   };
 
   return (
-    <PageWrapper>
-      <FormWrapper>
-        <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zarejestruj się</FormTitle>
-          <FormFields>
-            <TextField label="Nazwa użytkownika" name="username" />
-            <TextField label="Email" name="email" />
-            <PasswordField label="Hasło" name="password" />
-            <PasswordField label="Powtórz hasło" name="repeatPassword" />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zarejestruj się
-            </Button>
-          </FormActions>
-          <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
-        </Form>
-      </FormWrapper>
-    </PageWrapper>
+    <ContentWrapper>
+      <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
+        <FormTitle>Zarejestruj się</FormTitle>
+        <FormFields>
+          <TextField label="Nazwa użytkownika" name="username" required />
+          <TextField label="Email" name="email" required />
+          <PasswordField label="Hasło" name="password" required />
+          <PasswordField label="Powtórz hasło" name="repeatPassword" required />
+        </FormFields>
+        <FormActions>
+          <Button type="submit" variant="contained" size="large">
+            Zarejestruj się
+          </Button>
+        </FormActions>
+        <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
+      </Form>
+    </ContentWrapper>
   );
 };
 
 export default RegisterPage;
-
-const PageWrapper = styled('main')<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(8, 4)};
-  `
-);
-
-const FormWrapper = styled('div')<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(0, 100)};
-  `
-);

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import CameraAddPage from 'pages/CameraAddPage';
+import CameraRegisterPage from 'pages/CameraRegisterPage';
 import DashboardPage from 'pages/DashboardPage';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
@@ -18,6 +20,22 @@ const RoutesApp: React.FC = () => {
         element={
           <AuthRoute>
             <DashboardPage />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/camera/add"
+        element={
+          <AuthRoute>
+            <CameraAddPage />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path="/camera/register"
+        element={
+          <AuthRoute>
+            <CameraRegisterPage />
           </AuthRoute>
         }
       />
