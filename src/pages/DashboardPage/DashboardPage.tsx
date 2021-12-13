@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
+import Spinner from 'components/common/Spinner';
 import { ContentWrapperWide } from 'components/common/styled';
 
 import { OwnedCameraList, UsedCameraList } from './components/CameraList';
@@ -10,8 +11,14 @@ import { Camera } from './model';
 import { getOwnedCameras, getUsedCameras } from './queries';
 
 const DashboardPage = () => {
-  const { data: ownedCameras } = useQuery<Camera[]>('getOwnedCameras', getOwnedCameras);
-  const { data: usedCameras } = useQuery<Camera[]>('getUsedCameras', getUsedCameras);
+  const { data: ownedCameras, isLoading: isOwnedLoading } = useQuery<Camera[]>(
+    'getOwnedCameras',
+    getOwnedCameras
+  );
+  const { data: usedCameras, isLoading: isUsedLoading } = useQuery<Camera[]>(
+    'getUsedCameras',
+    getUsedCameras
+  );
 
   return (
     <>
@@ -19,7 +26,9 @@ const DashboardPage = () => {
         <Typography color="white" variant="h4" component="h2">
           Moje kamery
         </Typography>
-        <OwnedCameraList cameras={ownedCameras || []} />
+        <Spinner isLoading={isOwnedLoading}>
+          <OwnedCameraList cameras={ownedCameras} />
+        </Spinner>
         <ListActions>
           <Button variant="contained" size="large" component={Link} to="/camera/register">
             Zarejestruj nową kamerę
@@ -31,7 +40,9 @@ const DashboardPage = () => {
         <Typography color="white" variant="h4" component="h2">
           Pozostałe kamery
         </Typography>
-        <UsedCameraList cameras={usedCameras || []} />
+        <Spinner isLoading={isUsedLoading}>
+          <UsedCameraList cameras={usedCameras} />
+        </Spinner>
         <ListActions>
           <Button variant="contained" size="large" component={Link} to="/camera/add">
             Dodaj nową kamerę

@@ -1,4 +1,4 @@
-import { Card, CardContent, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 
@@ -17,11 +17,3 @@ export const ContentWrapperWide = styled('div')<{ theme?: Theme }>(
     margin-bottom: ${theme.spacing(12)};
   `
 );
-
-export const ContentBody: React.FC = ({ children }) => {
-  return (
-    <Card>
-      <CardContent>{children}</CardContent>
-    </Card>
-  );
-};

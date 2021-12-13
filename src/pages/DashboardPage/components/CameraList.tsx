@@ -4,20 +4,21 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Paper,
-  Theme,
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
+
+import ContentBody from 'components/common/ContentBody';
 
 import { Camera } from '../model';
 import { OwnedCameraAction, UsedCameraAction } from './CameraAction';
 
 interface Props {
-  cameras: Camera[];
+  cameras?: Camera[];
 }
 
 export const OwnedCameraList = ({ cameras }: Props) => {
-  if (!cameras.length) {
+  if (!cameras?.length) {
     return <NoData />;
   }
 
@@ -40,7 +41,7 @@ export const OwnedCameraList = ({ cameras }: Props) => {
 };
 
 export const UsedCameraList = ({ cameras }: Props) => {
-  if (!cameras.length) {
+  if (!cameras?.length) {
     return <NoData />;
   }
 
@@ -64,11 +65,11 @@ export const UsedCameraList = ({ cameras }: Props) => {
 
 const NoData = () => {
   return (
-    <NoDataWrapper>
+    <ContentBody>
       <Typography align="center" component="p">
         Nie masz jeszcze żadnych kamer
       </Typography>
-    </NoDataWrapper>
+    </ContentBody>
   );
 };
 
@@ -83,10 +84,3 @@ const CameraItemSecondaryAction = styled(ListItemSecondaryAction)`
   margin-top: 5px;
   margin-left: auto;
 `;
-
-const NoDataWrapper = styled(Paper)<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(4, 0)};
-    padding: ${theme.spacing(8, 4)};
-  `
-);
