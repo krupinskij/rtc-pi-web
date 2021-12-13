@@ -1,6 +1,6 @@
+import ComputerIcon from '@mui/icons-material/Computer';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import { Button, Grid } from '@mui/material';
 
 interface Props {
@@ -12,7 +12,7 @@ export const OwnedCameraAction = ({ id }: Props) => {
     <Grid container spacing={2} justifyContent="flex-end">
       <Grid item spacing={8}>
         <Button variant="contained" color="secondary" size="small">
-          <ScreenSearchDesktopIcon />
+          <ComputerIcon />
         </Button>
       </Grid>
       <Grid item spacing={8}>
@@ -34,7 +34,7 @@ export const UsedCameraAction = ({ id }: Props) => {
     <Grid container spacing={2}>
       <Grid item spacing={8}>
         <Button variant="contained" color="secondary" size="small">
-          <ScreenSearchDesktopIcon />
+          <ComputerIcon />
         </Button>
       </Grid>
       <Grid item spacing={8}>

@@ -11,6 +11,7 @@ import {
 import { styled } from '@mui/system';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import { ContentWrapperWide } from 'components/common/styled';
 
@@ -43,7 +44,7 @@ const DashboardPage = () => {
           ))}
         </List>
         <ListActions>
-          <Button variant="contained" size="large">
+          <Button variant="contained" size="large" component={Link} to="/camera/register">
             Zarejestruj nową kamerę
           </Button>
         </ListActions>
@@ -68,7 +69,7 @@ const DashboardPage = () => {
         </List>
 
         <ListActions>
-          <Button variant="contained" size="large">
+          <Button variant="contained" size="large" component={Link} to="/camera/add">
             Dodaj nową kamerę
           </Button>
         </ListActions>
