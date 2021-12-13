@@ -17,9 +17,8 @@ const AuthPanel = () => {
   return (
     <AuthPanelWrapper>
       <Button color="inherit">Mój profil</Button>
-      <Button color="inherit">Panel sterowania</Button>
-      <Button color="inherit" component={Link} to="/camera/add">
-        Dodaj kamerę
+      <Button color="inherit" component={Link} to="/dashboard">
+        Moje kamery
       </Button>
       <Button color="inherit" onClick={() => onLogout()}>
         Wyloguj się

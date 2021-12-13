@@ -1,7 +1,8 @@
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
-import { Theme, Toolbar, Typography } from '@mui/material';
+import { Button, Theme, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 import useAuth from 'auth/useAuth';
 
@@ -12,18 +13,25 @@ const Navbar = () => {
   const { user } = useAuth();
   return (
     <NavbarWrapper position="static">
-      <Toolbar>
-        <LogoIcon fontSize="large" />
-        <Typography variant="h5" sx={{ flexGrow: 1 }}>
-          RTC<LogoSpan>Pi</LogoSpan>
-        </Typography>
+      <NavbarToolbar>
+        <Button color="inherit" component={Link} to="/">
+          <LogoIcon fontSize="large" />
+          <Typography variant="h5">
+            RTC<LogoSpan>Pi</LogoSpan>
+          </Typography>
+        </Button>
         {!!user ? <AuthPanel /> : <NotAuthPanel />}
-      </Toolbar>
+      </NavbarToolbar>
     </NavbarWrapper>
   );
 };
 
 export default Navbar;
+
+const NavbarToolbar = styled(Toolbar)`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const NavbarWrapper = styled(AppBar)<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `

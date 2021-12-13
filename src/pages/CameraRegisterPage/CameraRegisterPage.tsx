@@ -6,7 +6,8 @@ import * as yup from 'yup';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { PasswordField, TextField } from 'components/Form/Field';
 import Modal from 'components/Modal';
-import { ContentBody, ContentWrapper } from 'components/common/styled';
+import ContentBody from 'components/common/ContentBody';
+import { ContentWrapper } from 'components/common/styled';
 
 import CameraCodeBox from './components/CameraCodeBox';
 import { CameraRegisterRepeatedInput } from './model';
