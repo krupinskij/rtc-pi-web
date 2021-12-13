@@ -11,17 +11,17 @@ export const OwnedCameraAction = ({ id }: Props) => {
   return (
     <Grid container spacing={2} justifyContent="flex-end">
       <Grid item spacing={8}>
-        <Button variant="contained">
+        <Button variant="contained" color="secondary" size="small">
           <ScreenSearchDesktopIcon />
         </Button>
       </Grid>
       <Grid item spacing={8}>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" size="small">
           <EditIcon />
         </Button>
       </Grid>
       <Grid item spacing={8}>
-        <Button variant="contained" color="error">
+        <Button variant="contained" color="error" size="small">
           <DeleteIcon />
         </Button>
       </Grid>
@@ -33,12 +33,12 @@ export const UsedCameraAction = ({ id }: Props) => {
   return (
     <Grid container spacing={2}>
       <Grid item spacing={8}>
-        <Button variant="contained">
+        <Button variant="contained" color="secondary" size="small">
           <ScreenSearchDesktopIcon />
         </Button>
       </Grid>
       <Grid item spacing={8}>
-        <Button variant="contained" color="error">
+        <Button variant="contained" color="error" size="small">
           <DeleteIcon />
         </Button>
       </Grid>

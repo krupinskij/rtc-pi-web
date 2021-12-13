@@ -1,4 +1,6 @@
+import AddIcon from '@mui/icons-material/Add';
 import {
+  Button,
   List,
   ListItem,
   ListItemSecondaryAction,
@@ -31,7 +33,7 @@ const DashboardPage = () => {
             <ListItem key={camera._id} component={CameraItemPaper}>
               <ListItemText>
                 <Typography variant="h5" component="h3">
-                  piękna kamera do ustawienia gdzieś na zewnątrz
+                  {camera.name}
                 </Typography>
               </ListItemText>
               <CameraItemSecondaryAction>
@@ -40,6 +42,11 @@ const DashboardPage = () => {
             </ListItem>
           ))}
         </List>
+        <ListActions>
+          <Button variant="contained" size="large">
+            Zarejestruj nową kamerę
+          </Button>
+        </ListActions>
       </ContentWrapperWide>
       <ContentWrapperWide>
         <Typography color="white" variant="h4" component="h2">
@@ -59,6 +66,12 @@ const DashboardPage = () => {
             </ListItem>
           ))}
         </List>
+
+        <ListActions>
+          <Button variant="contained" size="large">
+            Dodaj nową kamerę
+          </Button>
+        </ListActions>
       </ContentWrapperWide>
     </>
   );
@@ -76,4 +89,9 @@ const CameraItemSecondaryAction = styled(ListItemSecondaryAction)`
   transform: none;
   margin-top: 5px;
   margin-left: auto;
+`;
+
+const ListActions = styled('div')`
+  display: flex;
+  justify-content: center;
 `;
