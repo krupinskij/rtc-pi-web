@@ -1,6 +1,5 @@
 import { Theme } from '@mui/material';
 import { styled } from '@mui/system';
-import React from 'react';
 
 export const ContentWrapper = styled('div')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
