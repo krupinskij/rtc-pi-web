@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress, Snackbar } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -7,8 +7,16 @@ import useAuth from 'auth/useAuth';
 
 const AuthApp: React.FC = ({ children }) => {
   const { checkUser } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    checkUser().finally(() => {
+      setIsLoading(false);
+    });
+  }, [checkUser]);
 
   useEffect(() => {
     axios.interceptors.response.use(
@@ -18,20 +26,36 @@ const AuthApp: React.FC = ({ children }) => {
       (error: any) => {
         const { data, status } = error.response;
         if (status === 401 && data.authRetry) {
-          console.log(data.message);
+          setErrorMessage(data.message);
           navigate('/logout');
         }
 
         return Promise.reject(error);
       }
     );
+  }, [navigate]);
 
-    checkUser().finally(() => {
-      setIsLoading(false);
-    });
-  }, [checkUser, navigate]);
+  const handleClose = () => {
+    setErrorMessage('');
+  };
 
-  return isLoading ? <CircularProgress /> : <>{children}</>;
+  return isLoading ? (
+    <CircularProgress />
+  ) : (
+    <>
+      {children}
+      <Snackbar
+        open={!!errorMessage}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={5000}
+        onClose={handleClose}
+      >
+        <Alert severity="error" variant="filled" sx={{ width: '100%' }} onClose={handleClose}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
+    </>
+  );
 };
 
 export default AuthApp;
