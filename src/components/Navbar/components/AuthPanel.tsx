@@ -1,6 +1,7 @@
 import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import useAuth from 'auth/useAuth';
 
@@ -16,8 +17,9 @@ const AuthPanel = () => {
   return (
     <AuthPanelWrapper>
       <Button color="inherit">Mój profil</Button>
-      <Button color="inherit">Panel sterowania</Button>
-      <Button color="inherit">Dodaj kamerę</Button>
+      <Button color="inherit" component={Link} to="/dashboard">
+        Moje kamery
+      </Button>
       <Button color="inherit" onClick={() => onLogout()}>
         Wyloguj się
       </Button>

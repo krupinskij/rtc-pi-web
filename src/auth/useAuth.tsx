@@ -27,10 +27,10 @@ const useAuth = (): {
     setUser(user);
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     logoutUser();
     setUser(null);
-  };
+  }, [setUser]);
 
   const checkUser = useCallback(async () => {
     const csrfToken = sessionStorage.getItem('csrf-token');
