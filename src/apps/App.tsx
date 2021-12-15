@@ -14,13 +14,13 @@ const App: React.FC = () => {
     <RecoilApp>
       <QueryApp>
         <ThemeApp>
-          <AuthApp>
-            <RouterApp>
+          <RouterApp>
+            <AuthApp>
               <LayoutApp>
                 <RoutesApp />
               </LayoutApp>
-            </RouterApp>
-          </AuthApp>
+            </AuthApp>
+          </RouterApp>
         </ThemeApp>
       </QueryApp>
     </RecoilApp>

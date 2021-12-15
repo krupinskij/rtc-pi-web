@@ -1,3 +1,5 @@
+import { string } from 'yup/lib/locale';
+
 export type Tokens = {
   accessToken: string;
   csrfToken: string;
@@ -23,4 +25,8 @@ export type RegisterInput = {
   email: string;
   username: string;
   password: string;
+};
+
+export type RegisterInputWithRepeated = RegisterInput & {
+  repeatPassword: string;
 };

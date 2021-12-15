@@ -9,6 +9,7 @@ import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 
 import AuthRoute from './components/AuthRoute';
+import LogoutRoute from './components/LogoutRoute';
 import NotAuthRoute from './components/NotAuthRoute';
 
 const RoutesApp: React.FC = () => {
@@ -55,6 +56,7 @@ const RoutesApp: React.FC = () => {
           </NotAuthRoute>
         }
       />
+      <Route path="/logout" element={<LogoutRoute />} />
     </Routes>
   );
 };

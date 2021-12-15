@@ -1,8 +1,10 @@
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
+import ErrorAlert from 'components/ErrorAlert';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { PasswordField, TextField } from 'components/Form/Field';
 import Modal from 'components/Modal';
@@ -30,20 +32,30 @@ const registerValidationSchema = yup.object().shape({
 });
 
 const CameraRegisterPage = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
   const [code, setCode] = useState<string>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate: register, data: cameraCode } = useMutation(registerCamera);
+  const { mutateAsync: register, data: cameraCode } = useMutation(registerCamera);
 
+  const codeFromCameraCode = cameraCode?.code;
   useEffect(() => {
-    if (cameraCode?.code) {
-      setCode(cameraCode.code);
+    if (codeFromCameraCode) {
+      setCode(codeFromCameraCode);
       setIsModalOpen(true);
     }
-  }, [cameraCode]);
+  }, [codeFromCameraCode]);
 
   const onSubmit = async (cameraRRInput: CameraRegisterRepeatedInput) => {
     const { repeatedPassword, ...cameraRInput } = cameraRRInput;
-    register(cameraRInput);
+    try {
+      setError('');
+      await register(cameraRInput);
+      navigate('/dashboard');
+    } catch (err: any) {
+      setError(err);
+    }
   };
 
   return (
@@ -71,6 +83,7 @@ const CameraRegisterPage = () => {
           <FormLink prefix="Chcesz dodać istniejącą kamerę?" text="Dodaj kamerę" to="/camera/add" />
         </Form>
       </ContentWrapper>
+      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {!!code && <CameraCodeBox code={code} />}
       </Modal>
