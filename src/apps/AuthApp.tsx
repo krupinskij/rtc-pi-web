@@ -19,7 +19,7 @@ const AuthApp: React.FC = ({ children }) => {
   }, [checkUser]);
 
   useEffect(() => {
-    axios.interceptors.response.use(
+    const reqInterceptor = axios.interceptors.response.use(
       (value) => {
         return value;
       },
@@ -30,9 +30,10 @@ const AuthApp: React.FC = ({ children }) => {
           navigate('/logout');
         }
 
-        return Promise.reject(error);
+        return Promise.reject(data.message);
       }
     );
+    return () => axios.interceptors.response.eject(reqInterceptor);
   }, [navigate]);
 
   const handleClose = () => {

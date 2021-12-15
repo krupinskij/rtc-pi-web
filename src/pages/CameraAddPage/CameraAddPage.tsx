@@ -1,7 +1,10 @@
 import { Button } from '@mui/material';
+import { useState } from 'react';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
+import ErrorAlert from 'components/ErrorAlert';
 import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
 import { ContentWrapper } from 'components/common/styled';
@@ -22,10 +25,19 @@ const addValidationSchema = yup.object().shape({
 });
 
 const CameraAddPage = () => {
-  const { mutate: add } = useMutation(addCamera);
+  const { mutateAsync: add } = useMutation(addCamera);
+  const navigate = useNavigate();
+
+  const [error, setError] = useState('');
 
   const onSubmit = async (cameraAddInput: CameraAddInput) => {
-    add(cameraAddInput);
+    try {
+      setError('');
+      await add(cameraAddInput);
+      navigate('/dashboard');
+    } catch (err: any) {
+      setError(err);
+    }
   };
 
   return (
@@ -49,6 +61,7 @@ const CameraAddPage = () => {
           />
         </Form>
       </ContentWrapper>
+      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
     </>
   );
 };
