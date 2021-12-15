@@ -1,14 +1,17 @@
 import { Card, CardContent, Theme } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 
 interface Props {
   align?: 'start' | 'center' | 'end';
+  direction?: 'column' | 'row';
 }
 
-const ContentBody: React.FC<Props> = ({ align = 'center', children }) => {
+const ContentBody: React.FC<Props> = ({ align = 'center', direction = 'row', children }) => {
   return (
     <ContentBodyWrapper>
-      <CardContentAlign align={align}>{children}</CardContentAlign>
+      <CardContentAlign align={align} direction={direction}>
+        {children}
+      </CardContentAlign>
     </ContentBodyWrapper>
   );
 };
@@ -22,9 +25,11 @@ const ContentBodyWrapper = styled(Card)<{ theme?: Theme }>(
 );
 
 const CardContentAlign = styled(CardContent)<Props>(
-  ({ align }: Props) => `
+  ({ align, direction }: Props) => `
     display: flex;
+    flex-direction: ${direction};
     justify-content: ${align};
+    align-items: center;
     padding: 24px 0;
   `
 );

@@ -21,11 +21,13 @@ const LayoutWrapper = styled('div')<{ theme?: Theme }>(
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    gap: ${theme.spacing(8)};
   `
 );
 
-const PageWrapper = styled('main')<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin: ${theme.spacing(8, 4)};
-  `
-);
+const PageWrapper = styled('main')`
+  margin: auto 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;

@@ -1,7 +1,6 @@
-import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import { Button, Theme, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
 import useAuth from 'auth/useAuth';
@@ -15,7 +14,6 @@ const Navbar = () => {
     <NavbarWrapper position="static">
       <NavbarToolbar>
         <Button color="inherit" component={Link} to="/">
-          <LogoIcon fontSize="large" />
           <Typography variant="h5">
             RTC<LogoSpan>Pi</LogoSpan>
           </Typography>
@@ -45,11 +43,5 @@ const NavbarWrapper = styled(AppBar)<{ theme?: Theme }>(
 const LogoSpan = styled('span')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
     color: ${theme.palette.primary.main}
-  `
-);
-
-const LogoIcon = styled(ScreenSearchDesktopIcon)<{ theme?: Theme }>(
-  ({ theme }: { theme: Theme }) => `
-    margin-right: ${theme.spacing(2)}
   `
 );
