@@ -1,7 +1,9 @@
 import React from 'react';
+import { Navigate } from 'react-router';
 import { Routes, Route } from 'react-router-dom';
 
 import CameraAddPage from 'pages/CameraAddPage';
+import CameraPage from 'pages/CameraPage';
 import CameraRegisterPage from 'pages/CameraRegisterPage';
 import DashboardPage from 'pages/DashboardPage';
 import HomePage from 'pages/HomePage';
@@ -41,6 +43,14 @@ const RoutesApp: React.FC = () => {
         }
       />
       <Route
+        path="/camera/:id"
+        element={
+          <AuthRoute>
+            <CameraPage />
+          </AuthRoute>
+        }
+      />
+      <Route
         path="/login"
         element={
           <NotAuthRoute>
@@ -57,6 +67,7 @@ const RoutesApp: React.FC = () => {
         }
       />
       <Route path="/logout" element={<LogoutRoute />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
