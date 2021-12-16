@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 import ContentBody from 'components/common/ContentBody';
 
@@ -27,7 +28,7 @@ export const OwnedCameraList = ({ cameras }: Props) => {
       {cameras.map((camera) => (
         <ListItem key={camera._id} component={CameraItemPaper}>
           <ListItemText>
-            <Typography variant="h5" component="h3">
+            <Typography variant="h5" component={CameraLink} to={`/camera/${camera._id}`}>
               {camera.name}
             </Typography>
           </ListItemText>
@@ -50,7 +51,7 @@ export const UsedCameraList = ({ cameras }: Props) => {
       {cameras.map((camera) => (
         <ListItem key={camera._id} component={CameraItemPaper}>
           <ListItemText>
-            <Typography variant="h5" component="h3">
+            <Typography variant="h5" component={CameraLink} to={`/camera/${camera._id}`}>
               {camera.name}
             </Typography>
           </ListItemText>
@@ -76,6 +77,15 @@ const NoData = () => {
 const CameraItemPaper = styled(Paper)`
   margin-bottom: 10px;
   flex-wrap: wrap;
+`;
+
+const CameraLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const CameraItemSecondaryAction = styled(ListItemSecondaryAction)`

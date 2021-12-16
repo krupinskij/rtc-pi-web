@@ -2,6 +2,7 @@ import ComputerIcon from '@mui/icons-material/Computer';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button, Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface Props {
   id: string;
@@ -11,7 +12,13 @@ export const OwnedCameraAction = ({ id }: Props) => {
   return (
     <Grid container spacing={2} justifyContent="flex-end">
       <Grid item>
-        <Button variant="contained" color="secondary" size="small">
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          component={Link}
+          to={`/camera/${id}`}
+        >
           <ComputerIcon />
         </Button>
       </Grid>
@@ -33,7 +40,13 @@ export const UsedCameraAction = ({ id }: Props) => {
   return (
     <Grid container spacing={2}>
       <Grid item>
-        <Button variant="contained" color="secondary" size="small">
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          component={Link}
+          to={`/camera/${id}`}
+        >
           <ComputerIcon />
         </Button>
       </Grid>
