@@ -8,7 +8,7 @@ import useWebRTC from 'hooks/useWebRTC';
 const CameraPage = () => {
   const params = useParams();
 
-  const { localDescription, setConnection } = useWebRTC();
+  const {} = useWebRTC(params.id || '');
 
   return (
     <>

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import io from 'socket.io-client';
 
-const useWebRTC = (): {
-  localDescription?: RTCSessionDescription;
-  setConnection: (offer: RTCSessionDescriptionInit) => Promise<void>;
-} => {
+import config from 'config';
+
+const useWebRTC = (cameraId: string): {} => {
   const connectionRef = useRef(new RTCPeerConnection());
   const channelRef = useRef<RTCDataChannel>();
+  const socketRef = useRef(io(config.BASE_URL || ''));
 
   const [localDescription, setLocalDescription] = useState<RTCSessionDescription>();
 
@@ -24,7 +25,15 @@ const useWebRTC = (): {
       channelRef.current.onopen = (e) => console.log('open!!!!');
       channelRef.current.onclose = (e) => console.log('closed!!!!!!');
     });
-  }, [connectionRef, localDescription]);
+
+    socketRef.current.emit('get-offer-from-server', cameraId);
+
+    socketRef.current.on('send-offer-to-client', async (offer: RTCSessionDescriptionInit) => {
+      const answer = await setConnection(offer);
+
+      socketRef.current.emit('send-answer-to-server', cameraId, answer);
+    });
+  }, [connectionRef, cameraId]);
 
   useEffect(() => {
     if (channelRef.current) {
@@ -38,17 +47,18 @@ const useWebRTC = (): {
     }
   }, [channelRef]);
 
-  const setConnection = async (offer: RTCSessionDescriptionInit) => {
+  const setConnection = async (
+    offer: RTCSessionDescriptionInit
+  ): Promise<RTCSessionDescriptionInit> => {
     await connectionRef.current.setRemoteDescription(offer);
     console.debug('Remote description set');
     const answer = await connectionRef.current.createAnswer();
     await connectionRef.current.setLocalDescription(answer);
+
+    return answer;
   };
 
-  return {
-    localDescription,
-    setConnection,
-  };
+  return {};
 };
 
 export default useWebRTC;
