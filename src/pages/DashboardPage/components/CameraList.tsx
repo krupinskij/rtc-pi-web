@@ -32,7 +32,7 @@ export const OwnedCameraList = ({ cameras }: Props) => {
             </Typography>
           </ListItemText>
           <CameraItemSecondaryAction>
-            <OwnedCameraAction id={camera._id} />
+            <OwnedCameraAction id={camera._id} name={camera.name} />
           </CameraItemSecondaryAction>
         </ListItem>
       ))}
@@ -55,7 +55,7 @@ export const UsedCameraList = ({ cameras }: Props) => {
             </Typography>
           </ListItemText>
           <CameraItemSecondaryAction>
-            <UsedCameraAction id={camera._id} />
+            <UsedCameraAction id={camera._id} name={camera.name} />
           </CameraItemSecondaryAction>
         </ListItem>
       ))}
