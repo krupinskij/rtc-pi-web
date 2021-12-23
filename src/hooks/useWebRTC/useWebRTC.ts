@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 
 import config from 'config';
 
-const useWebRTC = (cameraId: string): {} => {
+const useWebRTC = (
+  cameraId: string,
+  videoRef: React.MutableRefObject<HTMLVideoElement | null>
+): {} => {
   const connectionRef = useRef(new RTCPeerConnection());
   const channelRef = useRef<RTCDataChannel>();
   const socketRef = useRef(io(config.BASE_URL || ''));
+  const streamRef = useRef(new MediaStream());
 
   const [localDescription, setLocalDescription] = useState<RTCSessionDescription>();
 
@@ -26,6 +30,17 @@ const useWebRTC = (cameraId: string): {} => {
       channelRef.current.onclose = (e) => console.log('closed!!!!!!');
     });
 
+    connectionRef.current.addEventListener('track', (event) => {
+      console.log(event);
+      event.streams[0].getTracks().forEach((track) => {
+        streamRef.current.addTrack(track);
+      });
+    });
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+    }
+
     socketRef.current.emit('get-offer-from-server', cameraId);
 
     socketRef.current.on('send-offer-to-client', async (offer: RTCSessionDescriptionInit) => {
@@ -33,7 +48,7 @@ const useWebRTC = (cameraId: string): {} => {
 
       socketRef.current.emit('send-answer-to-server', cameraId, answer);
     });
-  }, [connectionRef, cameraId]);
+  }, [connectionRef, streamRef, videoRef, cameraId]);
 
   useEffect(() => {
     if (channelRef.current) {
