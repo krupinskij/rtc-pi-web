@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 
-import ContentBody from 'components/common/ContentBody';
+import Card, { CardContent } from 'components/Card';
 
 import { Camera } from '../model';
 import { OwnedCameraAction, UsedCameraAction } from './CameraAction';
@@ -65,11 +65,13 @@ export const UsedCameraList = ({ cameras }: Props) => {
 
 const NoData = () => {
   return (
-    <ContentBody>
-      <Typography align="center" component="p">
-        Nie masz jeszcze żadnych kamer
-      </Typography>
-    </ContentBody>
+    <Card>
+      <CardContent>
+        <Typography align="center" component="p">
+          Nie masz jeszcze żadnych kamer
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 

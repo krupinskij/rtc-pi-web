@@ -28,7 +28,7 @@ const theme = createTheme({
       main: '#e54343',
     },
   },
-  spacing: (factor: number) => `${0.25 * factor}rem`,
+  spacing: (factor: number | 'auto') => (factor === 'auto' ? 'auto' : `${0.25 * factor}rem`),
   typography: {
     fontFamily: 'Kanit, sans-serif',
   },

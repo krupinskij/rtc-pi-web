@@ -5,10 +5,11 @@ import * as yup from 'yup';
 
 import { LoginInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
-import { ContentWrapper } from 'components/common/styled';
+import Container from 'components/common/Container';
 
 const loginValidationSchema = yup.object().shape({
   email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
@@ -37,22 +38,26 @@ const LoginPage = () => {
 
   return (
     <>
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={loginValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zaloguj się</FormTitle>
-          <FormFields>
-            <TextField label="Email" name="email" required />
-            <PasswordField label="Hasło" name="password" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zaloguj się
-            </Button>
-          </FormActions>
-          <FormLink prefix="Nie masz jeszcze konta?" text="Zarejestuj się" to="/register" />
+          <Card>
+            <CardContent>
+              <FormTitle>Zaloguj się</FormTitle>
+              <FormFields>
+                <TextField label="Email" name="email" required />
+                <PasswordField label="Hasło" name="password" required />
+              </FormFields>
+            </CardContent>
+            <CardActions>
+              <Button type="submit" variant="contained" size="large">
+                Zaloguj się
+              </Button>
+            </CardActions>
+            <FormLink prefix="Nie masz jeszcze konta?" text="Zarejestuj się" to="/register" />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
     </>
   );
 };

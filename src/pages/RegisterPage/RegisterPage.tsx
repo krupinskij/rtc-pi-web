@@ -5,10 +5,11 @@ import * as yup from 'yup';
 
 import { RegisterInputWithRepeated } from 'auth/model';
 import useAuth from 'auth/useAuth';
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
-import { ContentWrapper } from 'components/common/styled';
+import Container from 'components/common/Container';
 
 const registerValidationSchema = yup.object().shape({
   username: yup.string().required('To pole jest wymagane'),
@@ -43,24 +44,28 @@ const RegisterPage = () => {
 
   return (
     <>
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zarejestruj się</FormTitle>
-          <FormFields>
-            <TextField label="Nazwa użytkownika" name="username" required />
-            <TextField label="Email" name="email" required />
-            <PasswordField label="Hasło" name="password" required />
-            <PasswordField label="Powtórz hasło" name="repeatPassword" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zarejestruj się
-            </Button>
-          </FormActions>
-          <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
+          <Card>
+            <CardContent>
+              <FormTitle>Zarejestruj się</FormTitle>
+              <FormFields>
+                <TextField label="Nazwa użytkownika" name="username" required />
+                <TextField label="Email" name="email" required />
+                <PasswordField label="Hasło" name="password" required />
+                <PasswordField label="Powtórz hasło" name="repeatPassword" required />
+              </FormFields>
+            </CardContent>
+            <CardActions>
+              <Button type="submit" variant="contained" size="large">
+                Zarejestruj się
+              </Button>
+            </CardActions>
+            <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
     </>
   );
 };
