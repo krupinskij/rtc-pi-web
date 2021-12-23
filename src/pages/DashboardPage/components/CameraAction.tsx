@@ -12,16 +12,8 @@ interface Props {
 }
 
 export const OwnedCameraAction = ({ id, name }: Props) => {
-  const [removeModalOpen, setRemoveModalOpen] = useState(true);
-
   return (
     <>
-      <CameraRemoveModal
-        id={id}
-        name={name}
-        open={removeModalOpen}
-        onClose={() => setRemoveModalOpen(false)}
-      />
       <Grid container spacing={2} justifyContent="flex-end">
         <Grid item>
           <Button variant="contained" color="secondary" size="small">
@@ -31,6 +23,32 @@ export const OwnedCameraAction = ({ id, name }: Props) => {
         <Grid item>
           <Button variant="contained" color="secondary" size="small">
             <EditIcon />
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="error" size="small">
+            <DeleteIcon />
+          </Button>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
+
+export const UsedCameraAction = ({ id, name }: Props) => {
+  const [removeModalOpen, setRemoveModalOpen] = useState(false);
+  return (
+    <>
+      <CameraRemoveModal
+        id={id}
+        name={name}
+        open={removeModalOpen}
+        onClose={() => setRemoveModalOpen(false)}
+      />
+      <Grid container spacing={2}>
+        <Grid item>
+          <Button variant="contained" color="secondary" size="small">
+            <ComputerIcon />
           </Button>
         </Grid>
         <Grid item>
@@ -45,22 +63,5 @@ export const OwnedCameraAction = ({ id, name }: Props) => {
         </Grid>
       </Grid>
     </>
-  );
-};
-
-export const UsedCameraAction = ({ id }: Props) => {
-  return (
-    <Grid container spacing={2}>
-      <Grid item>
-        <Button variant="contained" color="secondary" size="small">
-          <ComputerIcon />
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button variant="contained" color="error" size="small">
-          <DeleteIcon />
-        </Button>
-      </Grid>
-    </Grid>
   );
 };
