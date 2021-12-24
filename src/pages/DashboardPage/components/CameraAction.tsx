@@ -5,6 +5,7 @@ import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 
 import CameraRemoveModal from './CameraRemoveModal';
+import CameraRemovePermModal from './CameraRemovePermModal';
 
 interface Props {
   id: string;
@@ -12,8 +13,16 @@ interface Props {
 }
 
 export const OwnedCameraAction = ({ id, name }: Props) => {
+  const [removePermModalOpen, setRemovePermModalOpen] = useState(false);
   return (
     <>
+      <CameraRemovePermModal
+        id={id}
+        name={name}
+        open={removePermModalOpen}
+        onClose={() => setRemovePermModalOpen(false)}
+      />
+
       <Grid container spacing={2} justifyContent="flex-end">
         <Grid item>
           <Button variant="contained" color="secondary" size="small">
@@ -26,7 +35,12 @@ export const OwnedCameraAction = ({ id, name }: Props) => {
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="error" size="small">
+          <Button
+            variant="contained"
+            color="error"
+            size="small"
+            onClick={() => setRemovePermModalOpen(true)}
+          >
             <DeleteIcon />
           </Button>
         </Grid>
@@ -45,6 +59,7 @@ export const UsedCameraAction = ({ id, name }: Props) => {
         open={removeModalOpen}
         onClose={() => setRemoveModalOpen(false)}
       />
+
       <Grid container spacing={2}>
         <Grid item>
           <Button variant="contained" color="secondary" size="small">
