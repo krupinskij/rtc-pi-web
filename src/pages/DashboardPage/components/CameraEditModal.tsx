@@ -9,6 +9,9 @@ import Form, { FormFields } from 'components/Form';
 import { PasswordField, TextField } from 'components/Form/Field';
 import Modal from 'components/common/Modal';
 
+import { EditRepeatedCameraInput } from '../model';
+import { editCamera } from '../queries';
+
 const editValidationSchema = yup.object().shape({
   newName: yup.string().max(50, 'Nazwa kamery powinna mieć co najwyżej 50 znaków'),
   newPassword: yup
@@ -31,15 +34,17 @@ interface Props {
 }
 
 const CameraEditModal = ({ id, name, open, onClose }: Props) => {
-  // const { mutateAsync: removePerm } = useMutation(removePermCamera);
+  const { mutateAsync: edit } = useMutation(editCamera);
   const queryClient = useQueryClient();
 
   const [error, setError] = useState('');
 
-  const onSubmit = async ({ password }: { password: string }) => {
+  const onSubmit = async (editRepeatedCameraInput: EditRepeatedCameraInput) => {
     try {
+      const { repeatNewPassword, ...editCameraInput } = editRepeatedCameraInput;
+
       setError('');
-      // await removePerm({ id, password });
+      await edit({ id, editCameraInput });
       queryClient.invalidateQueries('getOwnedCameras');
       onClose();
     } catch (err: any) {
@@ -55,7 +60,7 @@ const CameraEditModal = ({ id, name, open, onClose }: Props) => {
               Podaj nową nazwę kamery lub hasło
             </Typography>
             <FormFields>
-              <TextField label="Nowe nazwa kamery" name="newName" />
+              <TextField label="Nowa nazwa kamery" name="newName" value={name} />
               <PasswordField label="Nowe hasło" name="newPassword" />
               <PasswordField label="Powtórz nowe hasło" name="repeatNewPassword" />
               <PasswordField label="Stare hasło" name="password" required />

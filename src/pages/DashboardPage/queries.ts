@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Camera } from './model';
+import { Camera, EditCameraInput } from './model';
 
 export const getOwnedCameras = async (): Promise<Camera[]> => {
   const response = await axios.get<Camera[]>('/camera/owned');
@@ -12,6 +12,16 @@ export const getUsedCameras = async (): Promise<Camera[]> => {
   const response = await axios.get<Camera[]>('/camera/used');
 
   return response.data;
+};
+
+export const editCamera = async ({
+  id,
+  editCameraInput,
+}: {
+  id: string;
+  editCameraInput: EditCameraInput;
+}): Promise<void> => {
+  await axios.put(`/camera/edit/${id}`, editCameraInput);
 };
 
 export const removeCamera = async (id: string): Promise<void> => {
