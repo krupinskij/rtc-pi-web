@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from 'react-router';
 import { Routes, Route } from 'react-router-dom';
 
 import CameraAddPage from 'pages/CameraAddPage';
@@ -7,6 +8,7 @@ import DashboardPage from 'pages/DashboardPage';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
+import SettingsPage from 'pages/SettingsPage';
 
 import AuthRoute from './components/AuthRoute';
 import LogoutRoute from './components/LogoutRoute';
@@ -16,6 +18,7 @@ const RoutesApp: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="settings" element={<SettingsPage />} />
       <Route
         path="/dashboard"
         element={
@@ -57,6 +60,7 @@ const RoutesApp: React.FC = () => {
         }
       />
       <Route path="/logout" element={<LogoutRoute />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
