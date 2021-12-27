@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 
+import CameraEditModal from './CameraEditModal';
 import CameraRemoveModal from './CameraRemoveModal';
 import CameraRemovePermModal from './CameraRemovePermModal';
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const OwnedCameraAction = ({ id, name }: Props) => {
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [removePermModalOpen, setRemovePermModalOpen] = useState(false);
   return (
     <>
@@ -23,6 +25,13 @@ export const OwnedCameraAction = ({ id, name }: Props) => {
         onClose={() => setRemovePermModalOpen(false)}
       />
 
+      <CameraEditModal
+        id={id}
+        name={name}
+        open={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+      />
+
       <Grid container spacing={2} justifyContent="flex-end">
         <Grid item>
           <Button variant="contained" color="secondary" size="small">
@@ -30,7 +39,12 @@ export const OwnedCameraAction = ({ id, name }: Props) => {
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="secondary" size="small">
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={() => setEditModalOpen(true)}
+          >
             <EditIcon />
           </Button>
         </Grid>
