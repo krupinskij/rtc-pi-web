@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 const NotAuthPanel = () => {
   return (
     <NotAuthPanelWrapper>
+      <Button color="inherit" component={Link} to="/settings">
+        Ustawienia
+      </Button>
       <Button color="inherit" component={Link} to="/login">
         Zaloguj się
       </Button>
