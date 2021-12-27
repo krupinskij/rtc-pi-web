@@ -1,5 +1,3 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import { setIn } from 'final-form';
 import React from 'react';
 import { Form as FinalForm } from 'react-final-form';
@@ -27,13 +25,9 @@ const Form = ({ children, validationSchema, onSubmit }: Props) => {
   const validate = validateFormValues(validationSchema);
 
   return (
-    <Card elevation={12}>
-      <CardContent>
-        <FinalForm validate={validate} onSubmit={onSubmit}>
-          {({ handleSubmit }) => <form onSubmit={handleSubmit}>{children}</form>}
-        </FinalForm>
-      </CardContent>
-    </Card>
+    <FinalForm validate={validate} onSubmit={onSubmit}>
+      {({ handleSubmit }) => <form onSubmit={handleSubmit}>{children}</form>}
+    </FinalForm>
   );
 };
 

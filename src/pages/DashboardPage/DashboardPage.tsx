@@ -3,8 +3,8 @@ import { styled } from '@mui/system';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
+import Container from 'components/common/Container';
 import Spinner from 'components/common/Spinner';
-import { ContentWrapperWide } from 'components/common/styled';
 
 import { OwnedCameraList, UsedCameraList } from './components/CameraList';
 import { Camera } from './model';
@@ -22,7 +22,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <ContentWrapperWide>
+      <Container size="large">
         <Typography color="white" variant="h4" component="h2">
           Moje kamery
         </Typography>
@@ -34,9 +34,9 @@ const DashboardPage = () => {
             Zarejestruj nową kamerę
           </Button>
         </ListActions>
-      </ContentWrapperWide>
+      </Container>
 
-      <ContentWrapperWide>
+      <Container size="large">
         <Typography color="white" variant="h4" component="h2">
           Pozostałe kamery
         </Typography>
@@ -48,7 +48,7 @@ const DashboardPage = () => {
             Dodaj nową kamerę
           </Button>
         </ListActions>
-      </ContentWrapperWide>
+      </Container>
     </>
   );
 };

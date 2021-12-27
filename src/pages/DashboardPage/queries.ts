@@ -13,3 +13,17 @@ export const getUsedCameras = async (): Promise<Camera[]> => {
 
   return response.data;
 };
+
+export const removeCamera = async (id: string): Promise<void> => {
+  await axios.delete(`/camera/remove/${id}`);
+};
+
+export const removePermCamera = async ({
+  id,
+  password,
+}: {
+  id: string;
+  password: string;
+}): Promise<void> => {
+  await axios.delete(`/camera/removeperm/${id}`, { data: { password } });
+};

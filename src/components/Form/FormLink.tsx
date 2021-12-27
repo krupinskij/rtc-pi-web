@@ -25,7 +25,7 @@ export default FormLink;
 
 const FormLinkWrapper = styled('div')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
-    margin-top: ${theme.spacing(8)}
+    margin: ${theme.spacing(8, 0)}
   `
 );
 

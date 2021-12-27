@@ -4,10 +4,11 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
 import { TextField, PasswordField } from 'components/Form/Field';
-import { ContentWrapper } from 'components/common/styled';
+import Container from 'components/common/Container';
 
 import { CameraAddInput } from './model';
 import { addCamera } from './queries';
@@ -42,26 +43,30 @@ const CameraAddPage = () => {
 
   return (
     <>
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Dodaj istniejącą kamerę</FormTitle>
-          <FormFields>
-            <TextField label="Kod" name="code" required />
-            <PasswordField label="Hasło" name="password" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Dodaj kamerę
-            </Button>
-          </FormActions>
-          <FormLink
-            prefix="Chcesz dodać nową kamerę?"
-            text="Zarejestruj nową kamerę"
-            to="/camera/register"
-          />
+          <Card>
+            <CardContent>
+              <FormTitle>Dodaj istniejącą kamerę</FormTitle>
+              <FormFields>
+                <TextField label="Kod" name="code" required />
+                <PasswordField label="Hasło" name="password" required />
+              </FormFields>
+            </CardContent>
+            <CardActions>
+              <Button type="submit" variant="contained" size="large">
+                Dodaj kamerę
+              </Button>
+            </CardActions>
+            <FormLink
+              prefix="Chcesz dodać nową kamerę?"
+              text="Zarejestruj nową kamerę"
+              to="/camera/register"
+            />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
     </>
   );
 };

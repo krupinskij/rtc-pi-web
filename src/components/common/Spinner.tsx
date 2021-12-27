@@ -2,7 +2,7 @@ import { CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 
-import ContentBody from './ContentBody';
+import Card, { CardContent } from 'components/Card';
 
 interface Props {
   isLoading: boolean;
@@ -11,9 +11,11 @@ interface Props {
 const Spinner: React.FC<Props> = ({ isLoading, children }) => {
   if (isLoading) {
     return (
-      <ContentBody>
-        <Progress size="large" color="secondary" />
-      </ContentBody>
+      <Card>
+        <CardContent>
+          <Progress size="large" color="secondary" />
+        </CardContent>
+      </Card>
     );
   }
 

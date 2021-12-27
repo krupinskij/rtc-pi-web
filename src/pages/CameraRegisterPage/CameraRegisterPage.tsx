@@ -4,12 +4,12 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
 import { PasswordField, TextField } from 'components/Form/Field';
-import Modal from 'components/Modal';
-import ContentBody from 'components/common/ContentBody';
-import { ContentWrapper } from 'components/common/styled';
+import Container from 'components/common/Container';
+import Modal from 'components/common/Modal';
 
 import CameraCodeBox from './components/CameraCodeBox';
 import { CameraRegisterRepeatedInput } from './model';
@@ -61,31 +61,47 @@ const CameraRegisterPage = () => {
   return (
     <>
       {code && !isModalOpen && (
-        <ContentWrapper>
-          <ContentBody>
-            <CameraCodeBox code={code} />
-          </ContentBody>
-        </ContentWrapper>
+        <Container>
+          <Card>
+            <CardContent>
+              <CameraCodeBox code={code} />
+            </CardContent>
+          </Card>
+        </Container>
       )}
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zarejestruj nową kamerę</FormTitle>
-          <FormFields>
-            <TextField label="Nazwa kamery" name="name" multiline required />
-            <PasswordField label="Hasło" name="password" required />
-            <PasswordField label="Powtórz hasło" name="repeatPassword" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zarejestruj kamerę
-            </Button>
-          </FormActions>
-          <FormLink prefix="Chcesz dodać istniejącą kamerę?" text="Dodaj kamerę" to="/camera/add" />
+          <Card>
+            <CardContent>
+              <FormTitle>Zarejestruj nową kamerę</FormTitle>
+              <FormFields>
+                <TextField label="Nazwa kamery" name="name" multiline required />
+                <PasswordField label="Hasło" name="password" required />
+                <PasswordField label="Powtórz hasło" name="repeatPassword" required />
+              </FormFields>
+              <CardActions>
+                <Button type="submit" variant="contained" size="large">
+                  Zarejestruj kamerę
+                </Button>
+              </CardActions>
+            </CardContent>
+            <FormLink
+              prefix="Chcesz dodać istniejącą kamerę?"
+              text="Dodaj kamerę"
+              to="/camera/add"
+            />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        {!!code && <CameraCodeBox code={code} />}
+        {!!code && (
+          <Card>
+            <CardContent>
+              <CameraCodeBox code={code} />
+            </CardContent>
+          </Card>
+        )}
       </Modal>
     </>
   );
