@@ -25,5 +25,5 @@ export const removePermCamera = async ({
   id: string;
   password: string;
 }): Promise<void> => {
-  await axios.post(`/camera/removeperm/${id}`, { password });
+  await axios.delete(`/camera/removeperm/${id}`, { data: { password } });
 };
