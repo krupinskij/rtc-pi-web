@@ -1,4 +1,4 @@
-import { Grid, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/system';
 

@@ -5,6 +5,7 @@ import { useField } from 'react-final-form';
 interface Props {
   label: string;
   name: string;
+  value?: string;
   multiline?: boolean;
   required?: boolean;
 }
@@ -13,8 +14,8 @@ interface GenericProps extends Props {
   type: 'text' | 'password';
 }
 
-const Field = ({ label, name, type, multiline, required }: GenericProps) => {
-  const { input, meta } = useField(name);
+const Field = ({ label, name, type, value, multiline, required }: GenericProps) => {
+  const { input, meta } = useField(name, { defaultValue: value });
   return (
     <FieldWrapper
       type={type}
@@ -35,13 +36,29 @@ const Field = ({ label, name, type, multiline, required }: GenericProps) => {
   );
 };
 
-export const TextField = ({ label, name, multiline, required }: Props) => {
-  return <Field label={label} name={name} type="text" multiline={multiline} required={required} />;
+export const TextField = ({ label, name, value, multiline, required }: Props) => {
+  return (
+    <Field
+      label={label}
+      name={name}
+      value={value}
+      type="text"
+      multiline={multiline}
+      required={required}
+    />
+  );
 };
 
-export const PasswordField = ({ label, name, multiline, required }: Props) => {
+export const PasswordField = ({ label, name, value, multiline, required }: Props) => {
   return (
-    <Field label={label} name={name} type="password" multiline={multiline} required={required} />
+    <Field
+      label={label}
+      name={name}
+      value={value}
+      type="password"
+      multiline={multiline}
+      required={required}
+    />
   );
 };
 
