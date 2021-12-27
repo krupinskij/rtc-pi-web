@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "email": "Email",
+    "password": "Password",
+
+    "login.login": "Log In",
+    "login.dont-have-account": "Don't have account yet?",
+    "login.register": "Register"
+  }
+}

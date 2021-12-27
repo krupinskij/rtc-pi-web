@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
@@ -21,6 +22,8 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const LoginPage = () => {
+  const { t } = useTranslation();
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -42,18 +45,22 @@ const LoginPage = () => {
         <Form validationSchema={loginValidationSchema} onSubmit={onSubmit}>
           <Card>
             <CardContent>
-              <FormTitle>Zaloguj się</FormTitle>
+              <FormTitle>{t('login.login')}</FormTitle>
               <FormFields>
-                <TextField label="Email" name="email" required />
-                <PasswordField label="Hasło" name="password" required />
+                <TextField label={t('email')} name="email" required />
+                <PasswordField label={t('password')} name="password" required />
               </FormFields>
             </CardContent>
             <CardActions>
               <Button type="submit" variant="contained" size="large">
-                Zaloguj się
+                {t('login.login')}
               </Button>
             </CardActions>
-            <FormLink prefix="Nie masz jeszcze konta?" text="Zarejestuj się" to="/register" />
+            <FormLink
+              prefix={t('login.dont-have-account')}
+              text={t('login.register')}
+              to="/register"
+            />
           </Card>
         </Form>
       </Container>

@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "email": "Email",
+    "password": "Hasło",
+
+    "login.login": "Zaloguj Się",
+    "login.dont-have-account": "Nie masz jeszcze konta?",
+    "login.register": "Zarejestruj się"
+  }
+}
