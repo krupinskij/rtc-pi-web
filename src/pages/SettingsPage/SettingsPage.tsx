@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
@@ -10,6 +11,9 @@ import ErrorAlert from 'components/ErrorAlert';
 import Form, { FormFields, FormTitle } from 'components/Form';
 import { PasswordField } from 'components/Form/Field';
 import Container from 'components/common/Container';
+
+import { EditRepeatedUserInput } from './model';
+import { editUser } from './queries';
 
 const settingsValidationSchema = yup.object().shape({
   newPassword: yup
@@ -31,14 +35,16 @@ const settingsValidationSchema = yup.object().shape({
 const SettingsPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { mutateAsync: edit } = useMutation(editUser);
 
   const [error, setError] = useState('');
 
-  const onSubmit = async (loginInput: LoginInput) => {
+  const onSubmit = async (editRepeatedUserInput: EditRepeatedUserInput) => {
     try {
+      const { repeatNewPassword, ...editUserInput } = editRepeatedUserInput;
+
       setError('');
-      // await login(loginInput);
-      navigate('/dashboard');
+      await edit(editUserInput);
     } catch (err: any) {
       setError(err);
     }
