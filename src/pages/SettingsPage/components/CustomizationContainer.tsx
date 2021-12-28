@@ -9,7 +9,7 @@ import englishFlagIcon from 'assets/lang/flag-en.svg';
 import polishFlagIcon from 'assets/lang/flag-pl.svg';
 import Card, { CardContent } from 'components/Card';
 import Form, { FormFields, FormTitle } from 'components/Form';
-import { SelectField, SwitchField } from 'components/Form/Field';
+import { SelectField, SwitchField } from 'components/Form/fields';
 import { FieldOption } from 'components/Form/model';
 import Container from 'components/common/Container';
 
