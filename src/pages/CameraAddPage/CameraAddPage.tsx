@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
@@ -26,6 +27,8 @@ const addValidationSchema = yup.object().shape({
 });
 
 const CameraAddPage = () => {
+  const { t } = useTranslation();
+
   const { mutateAsync: add } = useMutation(addCamera);
   const navigate = useNavigate();
 
@@ -47,20 +50,20 @@ const CameraAddPage = () => {
         <Form validationSchema={addValidationSchema} onSubmit={onSubmit}>
           <Card>
             <CardContent>
-              <FormTitle>Dodaj istniejącą kamerę</FormTitle>
+              <FormTitle>{t('camera-add.add-existing')}</FormTitle>
               <FormFields>
-                <TextField label="Kod" name="code" required />
-                <PasswordField label="Hasło" name="password" required />
+                <TextField label={t('code')} name="code" required />
+                <PasswordField label={t('password')} name="password" required />
               </FormFields>
             </CardContent>
             <CardActions>
               <Button type="submit" variant="contained" size="large">
-                Dodaj kamerę
+                {t('camera-add.add')}
               </Button>
             </CardActions>
             <FormLink
-              prefix="Chcesz dodać nową kamerę?"
-              text="Zarejestruj nową kamerę"
+              prefix={t('camera-add.register-new')}
+              text={t('camera-add.register')}
               to="/camera/register"
             />
           </Card>

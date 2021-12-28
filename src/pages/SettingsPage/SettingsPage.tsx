@@ -1,10 +1,9 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
-import { LoginInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
 import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
@@ -33,8 +32,9 @@ const settingsValidationSchema = yup.object().shape({
 });
 
 const SettingsPage = () => {
+  const { t } = useTranslation();
+
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { mutateAsync: edit } = useMutation(editUser);
 
   const [error, setError] = useState('');
@@ -58,16 +58,20 @@ const SettingsPage = () => {
             <Form validationSchema={settingsValidationSchema} onSubmit={onSubmit}>
               <Card>
                 <CardContent>
-                  <FormTitle>Zmień hasło</FormTitle>
+                  <FormTitle>{t('settings.change-password')}</FormTitle>
                   <FormFields>
-                    <PasswordField label="Nowe hasło" name="newPassword" required />
-                    <PasswordField label="Powtórz nowe hasło" name="repeatNewPassword" required />
-                    <PasswordField label="Stare hasło" name="password" required />
+                    <PasswordField label={t('new-password')} name="newPassword" required />
+                    <PasswordField
+                      label={t('repeat-new-password')}
+                      name="repeatNewPassword"
+                      required
+                    />
+                    <PasswordField label={t('old-password')} name="password" required />
                   </FormFields>
                 </CardContent>
                 <CardActions>
                   <Button type="submit" variant="contained" size="large">
-                    Zmień hasło
+                    {t('settings.change-password')}
                   </Button>
                 </CardActions>
               </Card>

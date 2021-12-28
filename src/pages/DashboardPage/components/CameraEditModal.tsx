@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
 import * as yup from 'yup';
 
@@ -34,6 +35,8 @@ interface Props {
 }
 
 const CameraEditModal = ({ id, name, open, onClose }: Props) => {
+  const { t } = useTranslation();
+
   const { mutateAsync: edit } = useMutation(editCamera);
   const queryClient = useQueryClient();
 
@@ -57,21 +60,21 @@ const CameraEditModal = ({ id, name, open, onClose }: Props) => {
         <Card>
           <CardContent>
             <Typography align="center" component="h5" variant="h6">
-              Podaj nową nazwę kamery lub hasło
+              {t('dashboard.edit.enter-name-password')}
             </Typography>
             <FormFields>
-              <TextField label="Nowa nazwa kamery" name="newName" value={name} />
-              <PasswordField label="Nowe hasło" name="newPassword" />
-              <PasswordField label="Powtórz nowe hasło" name="repeatNewPassword" />
-              <PasswordField label="Stare hasło" name="password" required />
+              <TextField label={t('new-name')} name="newName" value={name} />
+              <PasswordField label={t('new-password')} name="newPassword" />
+              <PasswordField label={t('repeat-new-password')} name="repeatNewPassword" />
+              <PasswordField label={t('old-password')} name="password" required />
             </FormFields>
           </CardContent>
           <CardActions>
             <Button variant="contained" color="secondary" onClick={onClose}>
-              Nie
+              {t('cancel')}
             </Button>
             <Button variant="contained" color="primary" type="submit">
-              Tak
+              {t('proceed')}
             </Button>
           </CardActions>
         </Card>

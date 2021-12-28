@@ -1,10 +1,62 @@
 {
   "translation": {
+    "no": "no",
+    "yes": "yes",
+    "cancel": "cancel",
+    "proceed": "proceed",
+    "or": "or",
+
     "email": "Email",
+    "username": "Username",
+    "code": "Code",
+    "name": "Camera name",
+    "new-name": "New camera name",
     "password": "Password",
+    "new-password": "New password",
+    "old-password": "Old password",
+    "repeat-password": "Repeat password",
+    "repeat-new-password": "Repeat new password",
+
+    "navbar.my-cameras": "My cameras",
+    "navbar.settings": "Settings",
+    "navbar.login": "Log in",
+    "navbar.register": "Register",
+    "navbar.log-out": "Log out",
+
+    "camera-add.add-existing": "Add Existing Camera",
+    "camera-add.add": "Add camera",
+    "camera-add.register-new": "Want to register new camera?",
+    "camera-add.register": "Register camera",
+
+    "camera-register.register-new": "Register New Camera",
+    "camera-register.register": "Register",
+    "camera-register.add-existing": "Want to add existing camera?",
+    "camera-register.add": "Add camera",
+    "camera-register.code-box": "This camera code",
+
+    "dashboard.my-cameras": "My cameras",
+    "dashboard.register-new-camera": "Register new camera",
+    "dashboard.used-cameras": "Used cameras",
+    "dashboard.add-camera": "Add camera",
+    "dashboard.list.no-cameras": "You don't have any cameras here",
+    "dashboard.edit.enter-name-password": "Enter new cameras name or password",
+    "dashboard.remove.are-you-sure": "Are you sure you want to remove camera {{ name }}?",
+    "dashboard.remove-perm.are-you-sure": "Are you sure want to remove camera {{ name }} here and in everyone who's using it?",
+    "dashboard.remove-perm.password": "Enter camera password",
+
+    "home.check-out": "Check out",
+    "home.your-cameras": "your cameras",
+    "home.login": "Log in",
+    "home.register": "Register",
 
     "login.login": "Log In",
     "login.dont-have-account": "Don't have account yet?",
-    "login.register": "Register"
+    "login.register": "Register",
+
+    "register.register": "Register",
+    "register.already-have-account": "Already have account?",
+    "register.login": "Log in",
+
+    "settings.change-password": "Change Password"
   }
 }

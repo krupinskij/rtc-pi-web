@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
@@ -26,6 +27,8 @@ const registerValidationSchema = yup.object().shape({
 });
 
 const RegisterPage = () => {
+  const { t } = useTranslation();
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -48,20 +51,24 @@ const RegisterPage = () => {
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <Card>
             <CardContent>
-              <FormTitle>Zarejestruj się</FormTitle>
+              <FormTitle>{t('register.register')}</FormTitle>
               <FormFields>
-                <TextField label="Nazwa użytkownika" name="username" required />
-                <TextField label="Email" name="email" required />
-                <PasswordField label="Hasło" name="password" required />
-                <PasswordField label="Powtórz hasło" name="repeatPassword" required />
+                <TextField label={t('username')} name="username" required />
+                <TextField label={t('email')} name="email" required />
+                <PasswordField label={t('password')} name="password" required />
+                <PasswordField label={t('repeat-password')} name="repeatPassword" required />
               </FormFields>
             </CardContent>
             <CardActions>
               <Button type="submit" variant="contained" size="large">
-                Zarejestruj się
+                {t('register.register')}
               </Button>
             </CardActions>
-            <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
+            <FormLink
+              prefix={t('register.already-have-account')}
+              text={t('register.login')}
+              to="/login"
+            />
           </Card>
         </Form>
       </Container>

@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 
 import Card, { CardContent } from 'components/Card';
 
@@ -64,11 +65,12 @@ export const UsedCameraList = ({ cameras }: Props) => {
 };
 
 const NoData = () => {
+  const { t } = useTranslation();
   return (
     <Card>
       <CardContent>
         <Typography align="center" component="p">
-          Nie masz jeszcze żadnych kamer
+          {t('dashboard.list.no-cameras')}
         </Typography>
       </CardContent>
     </Card>

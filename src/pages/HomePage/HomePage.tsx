@@ -1,5 +1,6 @@
 import { Button, Theme, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import useAuth from 'auth/useAuth';
@@ -33,30 +34,36 @@ const HomePage = () => {
 
 export default HomePage;
 
-const AuthSection = () => (
-  <>
-    <Typography align="center" component="p" variant="h5">
-      Odwiedź
-    </Typography>
-    <Button variant="contained" size="large" component={ButtonLink} to="/dashboard">
-      kamery
-    </Button>
-  </>
-);
+const AuthSection = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Typography align="center" component="p" variant="h5">
+        {t('home.check-out')}
+      </Typography>
+      <Button variant="contained" size="large" component={ButtonLink} to="/dashboard">
+        {t('home.your-cameras')}
+      </Button>
+    </>
+  );
+};
 
-const NotAuthSection = () => (
-  <>
-    <Button variant="contained" size="large" component={ButtonLink} to="/login">
-      Zaloguj się
-    </Button>
-    <Typography align="center" component="p" variant="h5">
-      lub
-    </Typography>
-    <Button variant="contained" size="large" component={ButtonLink} to="/register">
-      Zarejestruj
-    </Button>
-  </>
-);
+const NotAuthSection = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Button variant="contained" size="large" component={ButtonLink} to="/login">
+        {t('home.login')}
+      </Button>
+      <Typography align="center" component="p" variant="h5">
+        {t('or')}
+      </Typography>
+      <Button variant="contained" size="large" component={ButtonLink} to="/register">
+        {t('home.register')}
+      </Button>
+    </>
+  );
+};
 
 const LogoSpan = styled('span')<{ theme?: Theme }>(
   ({ theme }: { theme: Theme }) => `
