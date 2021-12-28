@@ -1,6 +1,7 @@
 import { TextField as MaterialTextField, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { useField } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   label: string;
@@ -15,6 +16,7 @@ interface GenericProps extends Props {
 }
 
 const Field = ({ label, name, type, value, multiline, required }: GenericProps) => {
+  const { t } = useTranslation();
   const { input, meta } = useField(name, { defaultValue: value });
   return (
     <FieldWrapper
@@ -26,7 +28,7 @@ const Field = ({ label, name, type, value, multiline, required }: GenericProps) 
       onBlur={input.onBlur}
       onFocus={input.onFocus}
       error={meta.touched && !!meta.error}
-      helperText={meta.touched && meta.error}
+      helperText={meta.touched && t(meta.error?.message, meta.error?.data)}
       variant="filled"
       color="secondary"
       multiline={multiline}

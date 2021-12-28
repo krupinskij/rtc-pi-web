@@ -13,17 +13,17 @@ import { TextField, PasswordField } from 'components/Form/Field';
 import Container from 'components/common/Container';
 
 const registerValidationSchema = yup.object().shape({
-  username: yup.string().required('To pole jest wymagane'),
-  email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
+  username: yup.string().required('validation.required'),
+  email: yup.string().required('validation.required').email('validation.email-format'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation.password-max')
+    .required('validation.required'),
   repeatPassword: yup
     .string()
-    .required('To pole jest wymagane')
-    .oneOf([yup.ref('password')], 'Hasła nie pasują do siebie'),
+    .required('validation.required')
+    .oneOf([yup.ref('password')], 'validation.password-no-match'),
 });
 
 const RegisterPage = () => {

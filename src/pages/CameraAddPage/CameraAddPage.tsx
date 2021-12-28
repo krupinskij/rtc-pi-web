@@ -15,15 +15,12 @@ import { CameraAddInput } from './model';
 import { addCamera } from './queries';
 
 const addValidationSchema = yup.object().shape({
-  code: yup
-    .string()
-    .required('To pole jest wymagane')
-    .length(10, 'Kod powinien mieć dokładnie 10 znaków'),
+  code: yup.string().required('validation.required').length(10, 'validation.code-length'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation.password-max')
+    .required('validation.required'),
 });
 
 const CameraAddPage = () => {

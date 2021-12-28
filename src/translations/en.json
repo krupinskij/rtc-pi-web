@@ -57,6 +57,14 @@
     "register.already-have-account": "Already have account?",
     "register.login": "Log in",
 
-    "settings.change-password": "Change Password"
+    "settings.change-password": "Change Password",
+
+    "validation.required": "This field is required",
+    "validation.camera-name-max": "Camera name should have max {{ max }} characters",
+    "validation.code-length": "Code should have length of {{ length }}",
+    "validation.email-format": "Incorrect format",
+    "validation.password-min": "Password should have min {{ min }} characters",
+    "validation.password-max": "Password should have max {{ max }} characters",
+    "validation.password-no-match": "Password doesn't match"
   }
 }

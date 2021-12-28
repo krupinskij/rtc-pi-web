@@ -14,7 +14,10 @@ const validateFormValues = (schema: AnyObjectSchema) => async (values: any) => {
     await schema.validate(values, { abortEarly: false });
   } catch (err: any) {
     const errors = err.inner.reduce((formError: any, innerError: any) => {
-      return setIn(formError, innerError.path, innerError.message);
+      return setIn(formError, innerError.path, {
+        message: innerError.message,
+        data: innerError.params,
+      });
     }, {});
 
     return errors;

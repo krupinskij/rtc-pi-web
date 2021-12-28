@@ -14,17 +14,14 @@ import { EditRepeatedCameraInput } from '../model';
 import { editCamera } from '../queries';
 
 const editValidationSchema = yup.object().shape({
-  newName: yup.string().max(50, 'Nazwa kamery powinna mieć co najwyżej 50 znaków'),
-  newPassword: yup
-    .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków'),
-  repeatNewPassword: yup.string().oneOf([yup.ref('newPassword')], 'Hasła nie pasują do siebie'),
+  newName: yup.string().max(50, 'validation.camera-name-max'),
+  newPassword: yup.string().min(5, 'validation.password-min').max(16, 'validation.password.max'),
+  repeatNewPassword: yup.string().oneOf([yup.ref('newPassword')], 'password-no-match'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation-password-max')
+    .required('validation.required'),
 });
 
 interface Props {

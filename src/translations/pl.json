@@ -53,6 +53,14 @@
 
     "register.register": "Zarejestruj Się",
     "register.already-have-account": "Masz już konto?",
-    "register.login": "Zaloguj się"
+    "register.login": "Zaloguj się",
+
+    "validation.required": "To pole jest wymagane",
+    "validation.camera-name-max": "Nazwa kamery powinna mieć co najwyżej {{ max }} znaków",
+    "validation.code-length": "Kod kamery powinien mieć dokładnie {{ length }} znaków",
+    "validation.email-format": "Niepoprawny format",
+    "validation.password-max": "Hasło powinno mieć co najwyżej {{ max }} znaków",
+    "validation.password-min": "Hasło powinno mieć co najmniej {{ min }} znaków",
+    "validation.password-no-match": "Hasła nie pasują do siebie"
   }
 }
