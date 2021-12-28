@@ -5,7 +5,7 @@ import { AnyObjectSchema } from 'yup';
 
 interface Props {
   children: React.ReactNode;
-  validationSchema: AnyObjectSchema;
+  validationSchema?: AnyObjectSchema;
   onSubmit: (value: any) => void;
 }
 
@@ -14,7 +14,10 @@ const validateFormValues = (schema: AnyObjectSchema) => async (values: any) => {
     await schema.validate(values, { abortEarly: false });
   } catch (err: any) {
     const errors = err.inner.reduce((formError: any, innerError: any) => {
-      return setIn(formError, innerError.path, innerError.message);
+      return setIn(formError, innerError.path, {
+        message: innerError.message,
+        data: innerError.params,
+      });
     }, {});
 
     return errors;
@@ -22,7 +25,7 @@ const validateFormValues = (schema: AnyObjectSchema) => async (values: any) => {
 };
 
 const Form = ({ children, validationSchema, onSubmit }: Props) => {
-  const validate = validateFormValues(validationSchema);
+  const validate = validationSchema && validateFormValues(validationSchema);
 
   return (
     <FinalForm validate={validate} onSubmit={onSubmit}>

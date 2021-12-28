@@ -1,0 +1,72 @@
+{
+  "translation": {
+    "no": "nie",
+    "yes": "tak",
+    "cancel": "anuluj",
+    "proceed": "dalej",
+    "or": "lub",
+
+    "email": "Email",
+    "username": "Nazwa użytkownika",
+    "code": "Kod",
+    "password": "Hasło",
+    "new-password": "Nowe hasło",
+    "old-password": "Stare hasło",
+    "repeat-password": "Powtórz hasło",
+    "repeat-new-password": "Powtórz nowe hasło",
+
+    "navbar.my-cameras": "Moje kamery",
+    "navbar.settings": "Ustawienia",
+    "navbar.login": "Zaloguj się",
+    "navbar.register": "Zarejestruj się",
+    "navbar.log-out": "Wyloguj się",
+
+    "camera-add.add-existing": "Dodaj Istniejącą Kamerę",
+    "camera-add.add": "Dodaj kamerę",
+    "camera-add.register-new": "Chcesz zarejestrować nową kamerę?",
+    "camera-add.register": "Zarejestruj kamerę",
+
+    "camera-register.register-new": "Zarejestruj nową kamerę",
+    "camera-register.register": "Zarejestruj",
+    "camera-register.add-existing": "Chcesz dodać istniejącą kamerę?",
+    "camera-register.add": "Dodaj kamerę",
+    "camera-register.code-box": "To jest kod kamery",
+
+    "dashboard.my-cameras": "Moje kamery",
+    "dashboard.register-new-camera": "Zarejestruj nową kamerę",
+    "dashboard.used-cameras": "Używane kamery",
+    "dashboard.add-camera": "Dodaj kamerę",
+    "dashboard.list.no-cameras": "Nie masz tu jeszcze żadnych kamer",
+    "dashboard.edit.enter-name-password": "Podaj nową nazwę lub hasło",
+    "dashboard.remove.are-you-sure": "Czy na pewno chcesz usunąć kamerę {{ name }}?",
+    "dashboard.remove-perm.are-you-sure": "Czy na pewno chcesz usunąc kamerę {{ name }} tutaj oraz każdemu użytkownikowi?",
+    "dashboard.remove-perm.password": "Podaj hasło kamery",
+
+    "home.check-out": "Sprawdź",
+    "home.your-cameras": "swoje kamery",
+    "home.login": "Zaloguj się",
+    "home.register": "Zarejestruj",
+
+    "login.login": "Zaloguj Się",
+    "login.dont-have-account": "Nie masz jeszcze konta?",
+    "login.register": "Zarejestruj się",
+
+    "register.register": "Zarejestruj Się",
+    "register.already-have-account": "Masz już konto?",
+    "register.login": "Zaloguj się",
+
+    "settings.change-password": "Zmień Hasło",
+    "settings.change-language": "Zmień Język",
+    "settings.select-language": "Wybierz język",
+    "settings.language.en": "Język angielski",
+    "settings.language.pl": "Język polski",
+
+    "validation.required": "To pole jest wymagane",
+    "validation.camera-name-max": "Nazwa kamery powinna mieć co najwyżej {{ max }} znaków",
+    "validation.code-length": "Kod kamery powinien mieć dokładnie {{ length }} znaków",
+    "validation.email-format": "Niepoprawny format",
+    "validation.password-max": "Hasło powinno mieć co najwyżej {{ max }} znaków",
+    "validation.password-min": "Hasło powinno mieć co najmniej {{ min }} znaków",
+    "validation.password-no-match": "Hasła nie pasują do siebie"
+  }
+}

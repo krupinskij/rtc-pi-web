@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
 
 import Card, { CardActions, CardContent } from 'components/Card';
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const CameraRemoveModal = ({ id, name, open, onClose }: Props) => {
+  const { t } = useTranslation();
   const { mutateAsync: remove } = useMutation(removeCamera);
   const queryClient = useQueryClient();
 
@@ -36,16 +38,16 @@ const CameraRemoveModal = ({ id, name, open, onClose }: Props) => {
     <Modal open={open} onClose={onClose}>
       <Card>
         <CardContent>
-          <Typography align="center" component="h4" variant="h6">
-            Czy na pewno chcesz usunąć u siebie kamerę: {name}?
+          <Typography align="center" component="h4" variant="h5">
+            {t('dashboard.remove.are-you-sure', { name })}
           </Typography>
         </CardContent>
         <CardActions>
           <Button variant="contained" color="secondary" onClick={onClose}>
-            Nie
+            {t('no')}
           </Button>
           <Button variant="contained" color="primary" onClick={handleRemove}>
-            Tak
+            {t('yes')}
           </Button>
         </CardActions>
       </Card>

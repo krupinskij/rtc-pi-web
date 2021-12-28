@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
 import * as yup from 'yup';
 
@@ -13,17 +14,14 @@ import { EditRepeatedCameraInput } from '../model';
 import { editCamera } from '../queries';
 
 const editValidationSchema = yup.object().shape({
-  newName: yup.string().max(50, 'Nazwa kamery powinna mieć co najwyżej 50 znaków'),
-  newPassword: yup
-    .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków'),
-  repeatNewPassword: yup.string().oneOf([yup.ref('newPassword')], 'Hasła nie pasują do siebie'),
+  newName: yup.string().max(50, 'validation.camera-name-max'),
+  newPassword: yup.string().min(5, 'validation.password-min').max(16, 'validation.password.max'),
+  repeatNewPassword: yup.string().oneOf([yup.ref('newPassword')], 'password-no-match'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation-password-max')
+    .required('validation.required'),
 });
 
 interface Props {
@@ -34,6 +32,8 @@ interface Props {
 }
 
 const CameraEditModal = ({ id, name, open, onClose }: Props) => {
+  const { t } = useTranslation();
+
   const { mutateAsync: edit } = useMutation(editCamera);
   const queryClient = useQueryClient();
 
@@ -57,21 +57,21 @@ const CameraEditModal = ({ id, name, open, onClose }: Props) => {
         <Card>
           <CardContent>
             <Typography align="center" component="h5" variant="h6">
-              Podaj nową nazwę kamery lub hasło
+              {t('dashboard.edit.enter-name-password')}
             </Typography>
             <FormFields>
-              <TextField label="Nowa nazwa kamery" name="newName" value={name} />
-              <PasswordField label="Nowe hasło" name="newPassword" />
-              <PasswordField label="Powtórz nowe hasło" name="repeatNewPassword" />
-              <PasswordField label="Stare hasło" name="password" required />
+              <TextField label={t('new-name')} name="newName" value={name} />
+              <PasswordField label={t('new-password')} name="newPassword" />
+              <PasswordField label={t('repeat-new-password')} name="repeatNewPassword" />
+              <PasswordField label={t('old-password')} name="password" required />
             </FormFields>
           </CardContent>
           <CardActions>
             <Button variant="contained" color="secondary" onClick={onClose}>
-              Nie
+              {t('cancel')}
             </Button>
             <Button variant="contained" color="primary" type="submit">
-              Tak
+              {t('proceed')}
             </Button>
           </CardActions>
         </Card>
