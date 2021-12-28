@@ -1,22 +1,12 @@
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/system';
-import React from 'react';
+import { ThemeMode } from 'model';
+import React, { useMemo, useState } from 'react';
 
-const theme = createTheme({
+const baseTheme = createTheme({
   palette: {
     primary: {
-      main: '#02ed60',
-    },
-    secondary: {
-      main: '#fff',
-    },
-    text: {
-      primary: '#fff',
-      secondary: '#fff',
-    },
-    background: {
-      paper: '#131313',
-      default: '#050505',
+      main: '#02ca52',
     },
     success: {
       main: '#00b448',
@@ -34,8 +24,69 @@ const theme = createTheme({
   },
 });
 
+const lightTheme = createTheme(baseTheme, {
+  palette: {
+    secondary: {
+      main: '#000',
+    },
+    text: {
+      primary: '#000',
+      secondary: '#000',
+    },
+    background: {
+      paper: '#fff',
+      default: '#ddd',
+    },
+  },
+});
+
+const darkTheme = createTheme(baseTheme, {
+  palette: {
+    secondary: {
+      main: '#fff',
+    },
+    text: {
+      primary: '#fff',
+      secondary: '#fff',
+    },
+    background: {
+      paper: '#131313',
+      default: '#050505',
+    },
+  },
+});
+
+export const ThemeModeContext = React.createContext({
+  themeMode: ThemeMode.Dark,
+  toggleThemeMode: () => {},
+});
+
 const ThemeApp: React.FC = ({ children }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  const [mode, setMode] = useState<ThemeMode>(
+    (localStorage.getItem('themeMode') as ThemeMode) || ThemeMode.Dark
+  );
+  const themeMode = useMemo(
+    () => ({
+      themeMode: mode,
+      toggleThemeMode: () => {
+        setMode((prevMode) => {
+          const mode = prevMode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark;
+          localStorage.setItem('themeMode', mode);
+
+          return mode;
+        });
+      },
+    }),
+    [mode]
+  );
+
+  const theme = useMemo(() => (mode === ThemeMode.Dark ? darkTheme : lightTheme), [mode]);
+
+  return (
+    <ThemeModeContext.Provider value={themeMode}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </ThemeModeContext.Provider>
+  );
 };
 
 export default ThemeApp;

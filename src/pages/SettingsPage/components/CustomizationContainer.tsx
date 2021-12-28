@@ -1,12 +1,15 @@
 import { SelectChangeEvent } from '@mui/material';
 import axios from 'axios';
+import { ThemeMode } from 'model';
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ThemeModeContext } from 'apps/ThemeApp';
 import englishFlagIcon from 'assets/lang/flag-en.svg';
 import polishFlagIcon from 'assets/lang/flag-pl.svg';
 import Card, { CardContent } from 'components/Card';
 import Form, { FormFields, FormTitle } from 'components/Form';
-import { SelectField } from 'components/Form/Field';
+import { SelectField, SwitchField } from 'components/Form/fields';
 import { FieldOption } from 'components/Form/model';
 import Container from 'components/common/Container';
 
@@ -25,6 +28,7 @@ const languageOptions: FieldOption[] = [
 
 const ChangeLanguageContainer = () => {
   const { t, i18n } = useTranslation();
+  const { themeMode, toggleThemeMode } = useContext(ThemeModeContext);
 
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
     const lang = event.target.value;
@@ -38,13 +42,18 @@ const ChangeLanguageContainer = () => {
       <Form onSubmit={() => {}}>
         <Card>
           <CardContent>
-            <FormTitle>{t('settings.change-language')}</FormTitle>
+            <FormTitle>{t('settings.customization')}</FormTitle>
             <FormFields>
               <SelectField
                 label={t('settings.select-language')}
                 value={i18n.language}
                 options={languageOptions}
                 onChange={handleLanguageChange}
+              />
+              <SwitchField
+                checked={themeMode === ThemeMode.Dark}
+                label={t('settings.dark-mode')}
+                onChange={toggleThemeMode}
               />
             </FormFields>
           </CardContent>

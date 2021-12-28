@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
 import Form, { FormFields, FormTitle } from 'components/Form';
-import { PasswordField } from 'components/Form/Field';
+import { PasswordField } from 'components/Form/fields';
 import Container from 'components/common/Container';
 
 import { EditRepeatedUserInput } from '../model';

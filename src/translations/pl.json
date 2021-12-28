@@ -56,10 +56,11 @@
     "register.login": "Zaloguj się",
 
     "settings.change-password": "Zmień Hasło",
-    "settings.change-language": "Zmień Język",
+    "settings.customization": "Personalizacja",
     "settings.select-language": "Wybierz język",
     "settings.language.en": "Język angielski",
     "settings.language.pl": "Język polski",
+    "settings.dark-mode": "Tryb ciemny",
 
     "validation.required": "To pole jest wymagane",
     "validation.camera-name-max": "Nazwa kamery powinna mieć co najwyżej {{ max }} znaków",

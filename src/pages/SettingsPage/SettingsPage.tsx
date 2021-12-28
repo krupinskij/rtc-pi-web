@@ -1,7 +1,7 @@
 import useAuth from 'auth/useAuth';
 
-import ChangeLanguageContainer from './components/ChangeLanguageContainer';
 import ChangePasswordContainer from './components/ChangePasswordContainer';
+import CustomizationContainer from './components/CustomizationContainer';
 
 const SettingsPage = () => {
   const { user } = useAuth();
@@ -9,7 +9,7 @@ const SettingsPage = () => {
   return (
     <>
       {!!user && <ChangePasswordContainer />}
-      <ChangeLanguageContainer />
+      <CustomizationContainer />
     </>
   );
 };
