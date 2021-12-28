@@ -55,6 +55,12 @@
     "register.already-have-account": "Masz już konto?",
     "register.login": "Zaloguj się",
 
+    "settings.change-password": "Zmień Hasło",
+    "settings.change-language": "Zmień Język",
+    "settings.select-language": "Wybierz język",
+    "settings.language.en": "Język angielski",
+    "settings.language.pl": "Język polski",
+
     "validation.required": "To pole jest wymagane",
     "validation.camera-name-max": "Nazwa kamery powinna mieć co najwyżej {{ max }} znaków",
     "validation.code-length": "Kod kamery powinien mieć dokładnie {{ length }} znaków",

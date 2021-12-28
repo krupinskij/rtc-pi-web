@@ -58,6 +58,10 @@
     "register.login": "Log in",
 
     "settings.change-password": "Change Password",
+    "settings.change-language": "Change Language",
+    "settings.select-language": "Select language",
+    "settings.language.en": "English language",
+    "settings.language.pl": "Polish language",
 
     "validation.required": "This field is required",
     "validation.camera-name-max": "Camera name should have max {{ max }} characters",

@@ -1,14 +1,17 @@
-import { Button } from '@mui/material';
+import { Button, SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
 
+import englishFlagIcon from 'assets/lang/flag-en.svg';
+import polishFlagIcon from 'assets/lang/flag-pl.svg';
 import useAuth from 'auth/useAuth';
 import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
 import Form, { FormFields, FormTitle } from 'components/Form';
-import { PasswordField } from 'components/Form/Field';
+import { PasswordField, SelectField } from 'components/Form/Field';
+import { FieldOption } from 'components/Form/model';
 import Container from 'components/common/Container';
 
 import { EditRepeatedUserInput } from './model';
@@ -31,8 +34,21 @@ const settingsValidationSchema = yup.object().shape({
     .required('validation.required'),
 });
 
+const languageOptions: FieldOption[] = [
+  {
+    value: 'en',
+    display: 'settings.language.en',
+    icon: englishFlagIcon,
+  },
+  {
+    value: 'pl',
+    display: 'settings.language.pl',
+    icon: polishFlagIcon,
+  },
+];
+
 const SettingsPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { user } = useAuth();
   const { mutateAsync: edit } = useMutation(editUser);
@@ -48,6 +64,10 @@ const SettingsPage = () => {
     } catch (err: any) {
       setError(err);
     }
+  };
+
+  const handleLanguageChange = (event: SelectChangeEvent<string>) => {
+    i18n.changeLanguage(event.target.value);
   };
 
   return (
@@ -80,6 +100,23 @@ const SettingsPage = () => {
           <Container>{error && <ErrorAlert error={error} />}</Container>
         </>
       )}
+      <Container>
+        <Form onSubmit={onSubmit}>
+          <Card>
+            <CardContent>
+              <FormTitle>{t('settings.change-language')}</FormTitle>
+              <FormFields>
+                <SelectField
+                  label={t('settings.select-language')}
+                  value={i18n.language}
+                  options={languageOptions}
+                  onChange={handleLanguageChange}
+                />
+              </FormFields>
+            </CardContent>
+          </Card>
+        </Form>
+      </Container>
     </>
   );
 };

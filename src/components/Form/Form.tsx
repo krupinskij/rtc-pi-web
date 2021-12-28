@@ -5,7 +5,7 @@ import { AnyObjectSchema } from 'yup';
 
 interface Props {
   children: React.ReactNode;
-  validationSchema: AnyObjectSchema;
+  validationSchema?: AnyObjectSchema;
   onSubmit: (value: any) => void;
 }
 
@@ -25,7 +25,7 @@ const validateFormValues = (schema: AnyObjectSchema) => async (values: any) => {
 };
 
 const Form = ({ children, validationSchema, onSubmit }: Props) => {
-  const validate = validateFormValues(validationSchema);
+  const validate = validationSchema && validateFormValues(validationSchema);
 
   return (
     <FinalForm validate={validate} onSubmit={onSubmit}>
