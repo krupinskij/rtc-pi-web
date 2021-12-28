@@ -1,4 +1,5 @@
 import { Button, SelectChangeEvent } from '@mui/material';
+import axios from 'axios';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
@@ -67,7 +68,10 @@ const SettingsPage = () => {
   };
 
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
-    i18n.changeLanguage(event.target.value);
+    const lang = event.target.value;
+    axios.defaults.headers.common['Accept-Language'] = lang;
+    localStorage.setItem('language', lang);
+    i18n.changeLanguage(lang);
   };
 
   return (
