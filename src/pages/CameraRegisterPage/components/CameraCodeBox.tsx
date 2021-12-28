@@ -1,14 +1,16 @@
 import { Theme, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   code: string;
 }
 
 const CameraCodeBox = ({ code }: Props) => {
+  const { t } = useTranslation();
   return (
     <>
-      <Typography align="center">To jest kod kamery</Typography>
+      <Typography align="center">{t('camera-register.code-box')}</Typography>
       <CameraCodeLabel align="center" variant="h2">
         {code}
       </CameraCodeLabel>

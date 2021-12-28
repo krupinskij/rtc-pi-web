@@ -1,16 +1,19 @@
 import { Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
+import Container from 'components/common/Container';
 import Spinner from 'components/common/Spinner';
-import { ContentWrapperWide } from 'components/common/styled';
 
 import { OwnedCameraList, UsedCameraList } from './components/CameraList';
 import { Camera } from './model';
 import { getOwnedCameras, getUsedCameras } from './queries';
 
 const DashboardPage = () => {
+  const { t } = useTranslation();
+
   const { data: ownedCameras, isLoading: isOwnedLoading } = useQuery<Camera[]>(
     'getOwnedCameras',
     getOwnedCameras
@@ -22,33 +25,33 @@ const DashboardPage = () => {
 
   return (
     <>
-      <ContentWrapperWide>
+      <Container size="large">
         <Typography color="white" variant="h4" component="h2">
-          Moje kamery
+          {t('dashboard.my-cameras')}
         </Typography>
         <Spinner isLoading={isOwnedLoading}>
           <OwnedCameraList cameras={ownedCameras} />
         </Spinner>
         <ListActions>
           <Button variant="contained" size="large" component={Link} to="/camera/register">
-            Zarejestruj nową kamerę
+            {t('dashboard.register-new-camera')}
           </Button>
         </ListActions>
-      </ContentWrapperWide>
+      </Container>
 
-      <ContentWrapperWide>
+      <Container size="large">
         <Typography color="white" variant="h4" component="h2">
-          Pozostałe kamery
+          {t('dashboard.used-cameras')}
         </Typography>
         <Spinner isLoading={isUsedLoading}>
           <UsedCameraList cameras={usedCameras} />
         </Spinner>
         <ListActions>
           <Button variant="contained" size="large" component={Link} to="/camera/add">
-            Dodaj nową kamerę
+            {t('dashboard.add-camera')}
           </Button>
         </ListActions>
-      </ContentWrapperWide>
+      </Container>
     </>
   );
 };
