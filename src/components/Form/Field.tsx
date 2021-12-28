@@ -136,8 +136,10 @@ const FormControlWrapper = styled(FormControl)<{ theme?: Theme }>(
 );
 
 const SelectedOption = styled(FilledInput)`
-  display: flex;
-  align-items: center;
+  && > * {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const OptionIconWrapper = styled(ListItemIcon)`
