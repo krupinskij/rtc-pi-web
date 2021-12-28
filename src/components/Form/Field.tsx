@@ -1,12 +1,14 @@
 import {
   FilledInput,
   FormControl,
+  FormControlLabel,
   InputLabel,
   ListItemIcon,
   ListItemText,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Switch,
   TextField as MaterialTextField,
   Theme,
 } from '@mui/material';
@@ -152,3 +154,31 @@ const OptionIconWrapper = styled(ListItemIcon)`
 const OptionIcon = styled('img')`
   height: 20px;
 `;
+
+interface SwitchProps {
+  label: string;
+  checked: boolean;
+  onChange: () => void;
+}
+
+export const SwitchField = ({ label, checked, onChange }: SwitchProps) => {
+  return (
+    <FieldControlWrapper
+      control={<Switch checked={checked} onChange={onChange} />}
+      label={label}
+      labelPlacement="start"
+    />
+  );
+};
+
+const FieldControlWrapper = styled(FormControlLabel)<{ theme?: Theme }>(
+  ({ theme }: { theme: Theme }) => `
+    margin: ${theme.spacing(4, 2)};
+    flex-direction: row;
+
+    & label {
+      font-size: 1.25rem;    
+      top: -5px;
+    }
+  `
+);

@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/system';
+import { ThemeMode } from 'model';
 import React, { useMemo, useState } from 'react';
 
 const baseTheme = createTheme({
@@ -55,20 +56,31 @@ const darkTheme = createTheme(baseTheme, {
   },
 });
 
-const ThemeModeContext = React.createContext({ toggleColorMode: () => {} });
+export const ThemeModeContext = React.createContext({
+  themeMode: ThemeMode.Dark,
+  toggleThemeMode: () => {},
+});
 
 const ThemeApp: React.FC = ({ children }) => {
-  const [mode, setMode] = useState(localStorage.getItem('themeMode') || 'dark');
+  const [mode, setMode] = useState<ThemeMode>(
+    (localStorage.getItem('themeMode') as ThemeMode) || ThemeMode.Dark
+  );
   const themeMode = useMemo(
     () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'dark' ? 'light' : 'dark'));
+      themeMode: mode,
+      toggleThemeMode: () => {
+        setMode((prevMode) => {
+          const mode = prevMode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark;
+          localStorage.setItem('themeMode', mode);
+
+          return mode;
+        });
       },
     }),
-    []
+    [mode]
   );
 
-  const theme = useMemo(() => (mode === 'dark' ? darkTheme : lightTheme), [mode]);
+  const theme = useMemo(() => (mode === ThemeMode.Dark ? darkTheme : lightTheme), [mode]);
 
   return (
     <ThemeModeContext.Provider value={themeMode}>
