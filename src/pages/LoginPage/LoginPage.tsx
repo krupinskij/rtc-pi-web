@@ -27,11 +27,11 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (loginInput: LoginInput) => {
     try {
-      setError('');
+      setError(null);
       await login(loginInput);
       navigate('/dashboard');
     } catch (err: any) {

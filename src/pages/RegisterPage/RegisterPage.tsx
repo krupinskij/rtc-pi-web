@@ -31,12 +31,12 @@ const RegisterPage = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (rrInput: RegisterInputWithRepeated) => {
     const { repeatPassword, ...registerInput } = rrInput;
     try {
-      setError('');
+      setError(null);
       await register(registerInput);
       navigate('/dashboard');
     } catch (err: any) {
