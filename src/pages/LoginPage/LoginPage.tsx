@@ -45,7 +45,7 @@ const LoginPage = () => {
         <Form validationSchema={loginValidationSchema} onSubmit={onSubmit}>
           <Card>
             <CardContent>
-              <FormTitle>{t('login.login')}</FormTitle>
+              <FormTitle>{t('login.sign-in')}</FormTitle>
               <FormFields>
                 <TextField label={t('email')} name="email" required />
                 <PasswordField label={t('password')} name="password" required />
@@ -53,12 +53,12 @@ const LoginPage = () => {
             </CardContent>
             <CardActions>
               <Button type="submit" variant="contained" size="large">
-                {t('login.login')}
+                {t('login.sign-in')}
               </Button>
             </CardActions>
             <FormLink
               prefix={t('login.dont-have-account')}
-              text={t('login.register')}
+              text={t('login.sign-up')}
               to="/register"
             />
           </Card>

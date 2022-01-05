@@ -50,7 +50,7 @@ const RegisterPage = () => {
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <Card>
             <CardContent>
-              <FormTitle>{t('register.register')}</FormTitle>
+              <FormTitle>{t('register.sign-up')}</FormTitle>
               <FormFields>
                 <TextField label={t('email')} name="email" required />
                 <PasswordField label={t('password')} name="password" required />
@@ -59,12 +59,12 @@ const RegisterPage = () => {
             </CardContent>
             <CardActions>
               <Button type="submit" variant="contained" size="large">
-                {t('register.register')}
+                {t('register.sign-up')}
               </Button>
             </CardActions>
             <FormLink
               prefix={t('register.already-have-account')}
-              text={t('register.login')}
+              text={t('register.sign-in')}
               to="/login"
             />
           </Card>

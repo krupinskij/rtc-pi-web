@@ -26,7 +26,7 @@ const AuthPanel = () => {
         {t('navbar.settings')}
       </Button>
       <Button color="inherit" onClick={() => onLogout()}>
-        {t('navbar.log-out')}
+        {t('navbar.sign-out')}
       </Button>
     </AuthPanelWrapper>
   );

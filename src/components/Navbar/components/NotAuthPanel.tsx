@@ -12,10 +12,10 @@ const NotAuthPanel = () => {
         {t('navbar.settings')}
       </Button>
       <Button color="inherit" component={Link} to="/login">
-        {t('navbar.login')}
+        {t('navbar.sign-in')}
       </Button>
       <Button color="inherit" component={Link} to="/register">
-        {t('navbar.register')}
+        {t('navbar.sign-up')}
       </Button>
     </NotAuthPanelWrapper>
   );
