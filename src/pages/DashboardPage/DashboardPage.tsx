@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Theme, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -26,7 +26,7 @@ const DashboardPage = () => {
   return (
     <>
       <Container size="large">
-        <Typography color="white" variant="h4" component="h2">
+        <Typography variant="h4" component={ListTitle}>
           {t('dashboard.my-cameras')}
         </Typography>
         <Spinner isLoading={isOwnedLoading}>
@@ -40,7 +40,7 @@ const DashboardPage = () => {
       </Container>
 
       <Container size="large">
-        <Typography color="white" variant="h4" component="h2">
+        <Typography variant="h4" component={ListTitle}>
           {t('dashboard.used-cameras')}
         </Typography>
         <Spinner isLoading={isUsedLoading}>
@@ -57,6 +57,12 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+const ListTitle = styled('h2')<{ theme?: Theme }>(
+  ({ theme }: { theme: Theme }) => `
+    color: ${theme.palette.text.primary};
+  `
+);
 
 const ListActions = styled('div')`
   display: flex;
