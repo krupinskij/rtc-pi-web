@@ -24,7 +24,9 @@ const AuthApp: React.FC = ({ children }) => {
         return value;
       },
       (error: any) => {
-        const { data, status } = error.response;
+        const data = error.response?.data;
+        const status = error.response?.status;
+
         if (status === 401 && data?.authRetry) {
           setErrorMessage(data?.message);
           navigate('/logout');
