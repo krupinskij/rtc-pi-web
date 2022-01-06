@@ -2,13 +2,14 @@ import { Alert } from '@mui/material';
 import { styled } from '@mui/system';
 
 interface Props {
-  error: string;
+  error: any;
 }
 
 const ErrorAlert = ({ error }: Props) => {
+  const message = error?.response?.data?.message;
   return (
     <ErrorWrapper severity="error" variant="filled">
-      {error}
+      {message}
     </ErrorWrapper>
   );
 };

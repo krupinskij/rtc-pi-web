@@ -33,11 +33,11 @@ const CameraRemovePermModal = ({ id, name, open, onClose }: Props) => {
   const { mutateAsync: removePerm } = useMutation(removePermCamera);
   const queryClient = useQueryClient();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async ({ password }: { password: string }) => {
     try {
-      setError('');
+      setError(null);
       await removePerm({ id, password });
       queryClient.invalidateQueries('getOwnedCameras');
       onClose();

@@ -29,11 +29,11 @@ const CameraAddPage = () => {
   const { mutateAsync: add } = useMutation(addCamera);
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (cameraAddInput: CameraAddInput) => {
     try {
-      setError('');
+      setError(null);
       await add(cameraAddInput);
       navigate('/dashboard');
     } catch (err: any) {

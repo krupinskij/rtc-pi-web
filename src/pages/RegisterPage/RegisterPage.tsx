@@ -13,7 +13,6 @@ import { TextField, PasswordField } from 'components/Form/fields';
 import Container from 'components/common/Container';
 
 const registerValidationSchema = yup.object().shape({
-  username: yup.string().required('validation.required'),
   email: yup.string().required('validation.required').email('validation.email-format'),
   password: yup
     .string()
@@ -32,12 +31,12 @@ const RegisterPage = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (rrInput: RegisterInputWithRepeated) => {
     const { repeatPassword, ...registerInput } = rrInput;
     try {
-      setError('');
+      setError(null);
       await register(registerInput);
       navigate('/dashboard');
     } catch (err: any) {
@@ -51,9 +50,8 @@ const RegisterPage = () => {
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
           <Card>
             <CardContent>
-              <FormTitle>{t('register.register')}</FormTitle>
+              <FormTitle>{t('register.sign-up')}</FormTitle>
               <FormFields>
-                <TextField label={t('username')} name="username" required />
                 <TextField label={t('email')} name="email" required />
                 <PasswordField label={t('password')} name="password" required />
                 <PasswordField label={t('repeat-password')} name="repeatPassword" required />
@@ -61,12 +59,12 @@ const RegisterPage = () => {
             </CardContent>
             <CardActions>
               <Button type="submit" variant="contained" size="large">
-                {t('register.register')}
+                {t('register.sign-up')}
               </Button>
             </CardActions>
             <FormLink
               prefix={t('register.already-have-account')}
-              text={t('register.login')}
+              text={t('register.sign-in')}
               to="/login"
             />
           </Card>

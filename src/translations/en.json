@@ -19,9 +19,9 @@
 
     "navbar.my-cameras": "My cameras",
     "navbar.settings": "Settings",
-    "navbar.login": "Log in",
-    "navbar.register": "Register",
-    "navbar.log-out": "Log out",
+    "navbar.sign-in": "Sign in",
+    "navbar.sign-up": "Sign up",
+    "navbar.sign-out": "Sign out",
 
     "camera-add.add-existing": "Add Existing Camera",
     "camera-add.add": "Add camera",
@@ -49,13 +49,13 @@
     "home.login": "Log in",
     "home.register": "Register",
 
-    "login.login": "Log In",
+    "login.sign-in": "Sign In",
     "login.dont-have-account": "Don't have account yet?",
-    "login.register": "Register",
+    "login.sign-up": "Sign up",
 
-    "register.register": "Register",
+    "register.sign-up": "Sign Up",
     "register.already-have-account": "Already have account?",
-    "register.login": "Log in",
+    "register.sign-in": "Sign in",
 
     "settings.change-password": "Change Password",
     "settings.customization": "Customization",
