@@ -21,11 +21,11 @@ const CameraRemoveModal = ({ id, name, open, onClose }: Props) => {
   const { mutateAsync: remove } = useMutation(removeCamera);
   const queryClient = useQueryClient();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const handleRemove = async () => {
     try {
-      setError('');
+      setError(null);
       await remove(id);
       queryClient.invalidateQueries('getUsedCameras');
       onClose();

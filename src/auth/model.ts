@@ -7,7 +7,6 @@ export type Tokens = {
 
 export type User = {
   _id: string;
-  username: string;
   email: string;
 };
 
@@ -23,7 +22,6 @@ export type LoginInput = {
 
 export type RegisterInput = {
   email: string;
-  username: string;
   password: string;
 };
 

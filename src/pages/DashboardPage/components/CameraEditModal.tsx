@@ -37,13 +37,13 @@ const CameraEditModal = ({ id, name, open, onClose }: Props) => {
   const { mutateAsync: edit } = useMutation(editCamera);
   const queryClient = useQueryClient();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (editRepeatedCameraInput: EditRepeatedCameraInput) => {
     try {
       const { repeatNewPassword, ...editCameraInput } = editRepeatedCameraInput;
 
-      setError('');
+      setError(null);
       await edit({ id, editCameraInput });
       queryClient.invalidateQueries('getOwnedCameras');
       onClose();

@@ -35,13 +35,13 @@ const ChangePasswordContainer = () => {
 
   const { mutateAsync: edit } = useMutation(editUser);
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (editRepeatedUserInput: EditRepeatedUserInput) => {
     try {
       const { repeatNewPassword, ...editUserInput } = editRepeatedUserInput;
 
-      setError('');
+      setError(null);
       await edit(editUserInput);
     } catch (err: any) {
       setError(err);

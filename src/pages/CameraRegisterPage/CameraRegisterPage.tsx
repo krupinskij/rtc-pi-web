@@ -33,7 +33,7 @@ const CameraRegisterPage = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const [code, setCode] = useState<string>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,7 +50,7 @@ const CameraRegisterPage = () => {
   const onSubmit = async (cameraRRInput: CameraRegisterRepeatedInput) => {
     const { repeatedPassword, ...cameraRInput } = cameraRRInput;
     try {
-      setError('');
+      setError(null);
       await register(cameraRInput);
       navigate('/dashboard');
     } catch (err: any) {

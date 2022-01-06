@@ -24,13 +24,15 @@ const AuthApp: React.FC = ({ children }) => {
         return value;
       },
       (error: any) => {
-        const { data, status } = error.response;
-        if (status === 401 && data.authRetry) {
-          setErrorMessage(data.message);
+        const data = error.response?.data;
+        const status = error.response?.status;
+
+        if (status === 401 && data?.authRetry) {
+          setErrorMessage(data?.message);
           navigate('/logout');
         }
 
-        return Promise.reject(data.message);
+        return Promise.reject(error);
       }
     );
     return () => axios.interceptors.response.eject(reqInterceptor);

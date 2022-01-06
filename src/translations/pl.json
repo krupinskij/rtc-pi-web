@@ -17,9 +17,9 @@
 
     "navbar.my-cameras": "Moje kamery",
     "navbar.settings": "Ustawienia",
-    "navbar.login": "Zaloguj się",
-    "navbar.register": "Zarejestruj się",
-    "navbar.log-out": "Wyloguj się",
+    "navbar.sign-in": "Zaloguj się",
+    "navbar.sign-up": "Zarejestruj się",
+    "navbar.sign-out": "Wyloguj się",
 
     "camera-add.add-existing": "Dodaj Istniejącą Kamerę",
     "camera-add.add": "Dodaj kamerę",
@@ -39,7 +39,7 @@
     "dashboard.list.no-cameras": "Nie masz tu jeszcze żadnych kamer",
     "dashboard.edit.enter-name-password": "Podaj nową nazwę lub hasło",
     "dashboard.remove.are-you-sure": "Czy na pewno chcesz usunąć kamerę {{ name }}?",
-    "dashboard.remove-perm.are-you-sure": "Czy na pewno chcesz usunąc kamerę {{ name }} tutaj oraz każdemu użytkownikowi?",
+    "dashboard.remove-perm.are-you-sure": "Czy na pewno chcesz usunąć kamerę {{ name }} tutaj oraz każdemu użytkownikowi?",
     "dashboard.remove-perm.password": "Podaj hasło kamery",
 
     "home.check-out": "Sprawdź",
@@ -47,13 +47,13 @@
     "home.login": "Zaloguj się",
     "home.register": "Zarejestruj",
 
-    "login.login": "Zaloguj Się",
+    "login.sign-in": "Zaloguj Się",
     "login.dont-have-account": "Nie masz jeszcze konta?",
-    "login.register": "Zarejestruj się",
+    "login.sign-up": "Zarejestruj się",
 
-    "register.register": "Zarejestruj Się",
+    "register.sign-up": "Zarejestruj Się",
     "register.already-have-account": "Masz już konto?",
-    "register.login": "Zaloguj się",
+    "register.sign-in": "Zaloguj się",
 
     "settings.change-password": "Zmień Hasło",
     "settings.customization": "Personalizacja",
