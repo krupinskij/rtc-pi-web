@@ -1,6 +1,6 @@
 import { SelectChangeEvent } from '@mui/material';
 import axios from 'axios';
-import { ThemeMode } from 'model';
+import { StorageKey, ThemeMode } from 'model';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -33,7 +33,7 @@ const ChangeLanguageContainer = () => {
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
     const lang = event.target.value;
     axios.defaults.headers.common['Accept-Language'] = lang;
-    localStorage.setItem('language', lang);
+    localStorage.setItem(StorageKey.Language, lang);
     i18n.changeLanguage(lang);
   };
 

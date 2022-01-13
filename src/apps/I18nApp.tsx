@@ -1,4 +1,5 @@
 import i18n from 'i18next';
+import { StorageKey } from 'model';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { initReactI18next } from 'react-i18next';
@@ -10,7 +11,7 @@ i18n.use(initReactI18next).init({
     en,
     pl,
   },
-  lng: localStorage.getItem('language') || 'pl',
+  lng: localStorage.getItem(StorageKey.Language) || 'pl',
   fallbackLng: 'pl',
   interpolation: {
     escapeValue: false,
