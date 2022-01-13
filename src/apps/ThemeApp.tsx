@@ -1,7 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/system';
-import { StorageKey, ThemeMode } from 'model';
 import React, { useMemo, useState } from 'react';
+
+import { StorageKey, ThemeMode } from 'model';
 
 const baseTheme = createTheme({
   palette: {
