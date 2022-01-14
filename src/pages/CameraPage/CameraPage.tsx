@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ContentBody from 'components/common/ContentBody';
-import { ContentWrapper } from 'components/common/styled';
+import Card, { CardContent } from 'components/Card';
+import Container from 'components/common/Container';
 import useWebRTC from 'hooks/useWebRTC';
 
 const CameraPage = () => {
@@ -14,10 +14,11 @@ const CameraPage = () => {
   return (
     <>
       <video ref={videoRef} autoPlay playsInline />;
-      <ContentWrapper>
-        <ContentBody>{params.id}</ContentBody>
-        <ContentBody>{params.id}</ContentBody>
-      </ContentWrapper>
+      <Container size="large">
+        <Card>
+          <CardContent>{params.id}</CardContent>
+        </Card>
+      </Container>
     </>
   );
 };

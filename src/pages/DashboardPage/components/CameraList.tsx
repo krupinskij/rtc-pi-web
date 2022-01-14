@@ -7,11 +7,8 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-=======
 import { useTranslation } from 'react-i18next';
->>>>>>> a33584cf79f4ff0a110f6fa055fddbc77a15698d
+import { Link } from 'react-router-dom';
 
 import Card, { CardContent } from 'components/Card';
 

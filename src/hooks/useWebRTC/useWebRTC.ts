@@ -48,7 +48,7 @@ const useWebRTC = (
 
       socketRef.current.emit('send-answer-to-server', cameraId, answer);
     });
-  }, [connectionRef, streamRef, videoRef, cameraId]);
+  }, [connectionRef, streamRef, videoRef, localDescription, cameraId]);
 
   useEffect(() => {
     if (channelRef.current) {
