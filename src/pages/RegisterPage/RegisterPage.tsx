@@ -1,39 +1,42 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
 import { RegisterInputWithRepeated } from 'auth/model';
 import useAuth from 'auth/useAuth';
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
-import { TextField, PasswordField } from 'components/Form/Field';
-import { ContentWrapper } from 'components/common/styled';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
+import { TextField, PasswordField } from 'components/Form/fields';
+import Container from 'components/common/Container';
 
 const registerValidationSchema = yup.object().shape({
-  username: yup.string().required('To pole jest wymagane'),
-  email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
+  email: yup.string().required('validation.required').email('validation.email-format'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation.password-max')
+    .required('validation.required'),
   repeatPassword: yup
     .string()
-    .required('To pole jest wymagane')
-    .oneOf([yup.ref('password')], 'Hasła nie pasują do siebie'),
+    .required('validation.required')
+    .oneOf([yup.ref('password')], 'validation.password-no-match'),
 });
 
 const RegisterPage = () => {
+  const { t } = useTranslation();
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (rrInput: RegisterInputWithRepeated) => {
     const { repeatPassword, ...registerInput } = rrInput;
     try {
-      setError('');
+      setError(null);
       await register(registerInput);
       navigate('/dashboard');
     } catch (err: any) {
@@ -43,24 +46,31 @@ const RegisterPage = () => {
 
   return (
     <>
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zarejestruj się</FormTitle>
-          <FormFields>
-            <TextField label="Nazwa użytkownika" name="username" required />
-            <TextField label="Email" name="email" required />
-            <PasswordField label="Hasło" name="password" required />
-            <PasswordField label="Powtórz hasło" name="repeatPassword" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zarejestruj się
-            </Button>
-          </FormActions>
-          <FormLink prefix="Masz już konto?" text="Zaloguj się" to="/login" />
+          <Card>
+            <CardContent>
+              <FormTitle>{t('register.sign-up')}</FormTitle>
+              <FormFields>
+                <TextField label={t('email')} name="email" required />
+                <PasswordField label={t('password')} name="password" required />
+                <PasswordField label={t('repeat-password')} name="repeatPassword" required />
+              </FormFields>
+            </CardContent>
+            <CardActions>
+              <Button type="submit" variant="contained" size="large">
+                {t('register.sign-up')}
+              </Button>
+            </CardActions>
+            <FormLink
+              prefix={t('register.already-have-account')}
+              text={t('register.sign-in')}
+              to="/login"
+            />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
     </>
   );
 };

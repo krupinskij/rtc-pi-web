@@ -1,33 +1,37 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
 import { LoginInput } from 'auth/model';
 import useAuth from 'auth/useAuth';
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
-import { TextField, PasswordField } from 'components/Form/Field';
-import { ContentWrapper } from 'components/common/styled';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
+import { TextField, PasswordField } from 'components/Form/fields';
+import Container from 'components/common/Container';
 
 const loginValidationSchema = yup.object().shape({
-  email: yup.string().required('To pole jest wymagane').email('Niepoprawny format'),
+  email: yup.string().required('validation.required').email('validation.email-format'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation.password-max')
+    .required('validation.required'),
 });
 
 const LoginPage = () => {
+  const { t } = useTranslation();
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const onSubmit = async (loginInput: LoginInput) => {
     try {
-      setError('');
+      setError(null);
       await login(loginInput);
       navigate('/dashboard');
     } catch (err: any) {
@@ -37,22 +41,30 @@ const LoginPage = () => {
 
   return (
     <>
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={loginValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zaloguj się</FormTitle>
-          <FormFields>
-            <TextField label="Email" name="email" required />
-            <PasswordField label="Hasło" name="password" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zaloguj się
-            </Button>
-          </FormActions>
-          <FormLink prefix="Nie masz jeszcze konta?" text="Zarejestuj się" to="/register" />
+          <Card>
+            <CardContent>
+              <FormTitle>{t('login.sign-in')}</FormTitle>
+              <FormFields>
+                <TextField label={t('email')} name="email" required />
+                <PasswordField label={t('password')} name="password" required />
+              </FormFields>
+            </CardContent>
+            <CardActions>
+              <Button type="submit" variant="contained" size="large">
+                {t('login.sign-in')}
+              </Button>
+            </CardActions>
+            <FormLink
+              prefix={t('login.dont-have-account')}
+              text={t('login.sign-up')}
+              to="/register"
+            />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
     </>
   );
 };

@@ -1,15 +1,21 @@
 import { Button, Theme } from '@mui/material';
 import { styled } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const NotAuthPanel = () => {
+  const { t } = useTranslation();
+
   return (
     <NotAuthPanelWrapper>
+      <Button color="inherit" component={Link} to="/settings">
+        {t('navbar.settings')}
+      </Button>
       <Button color="inherit" component={Link} to="/login">
-        Zaloguj się
+        {t('navbar.sign-in')}
       </Button>
       <Button color="inherit" component={Link} to="/register">
-        Zarejestruj się
+        {t('navbar.sign-up')}
       </Button>
     </NotAuthPanelWrapper>
   );

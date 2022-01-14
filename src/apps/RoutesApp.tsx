@@ -9,6 +9,7 @@ import DashboardPage from 'pages/DashboardPage';
 import HomePage from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
+import SettingsPage from 'pages/SettingsPage';
 
 import AuthRoute from './components/AuthRoute';
 import LogoutRoute from './components/LogoutRoute';
@@ -18,6 +19,7 @@ const RoutesApp: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="settings" element={<SettingsPage />} />
       <Route
         path="/dashboard"
         element={

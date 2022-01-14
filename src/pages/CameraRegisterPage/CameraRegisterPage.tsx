@@ -1,39 +1,39 @@
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
+import Card, { CardActions, CardContent } from 'components/Card';
 import ErrorAlert from 'components/ErrorAlert';
-import Form, { FormActions, FormFields, FormLink, FormTitle } from 'components/Form';
-import { PasswordField, TextField } from 'components/Form/Field';
-import Modal from 'components/Modal';
-import ContentBody from 'components/common/ContentBody';
-import { ContentWrapper } from 'components/common/styled';
+import Form, { FormFields, FormLink, FormTitle } from 'components/Form';
+import { PasswordField, TextField } from 'components/Form/fields';
+import Container from 'components/common/Container';
+import Modal from 'components/common/Modal';
 
 import CameraCodeBox from './components/CameraCodeBox';
 import { CameraRegisterRepeatedInput } from './model';
 import { registerCamera } from './queries';
 
 const registerValidationSchema = yup.object().shape({
-  name: yup
-    .string()
-    .max(50, 'Nazwa kamery powinna mieć co najwyżej 50 znaków')
-    .required('To pole jest wymagane'),
+  name: yup.string().max(50, 'validation.camera-name-max').required('validation.required'),
   password: yup
     .string()
-    .min(5, 'Hasło powinno mieć co najmniej 5 znaków')
-    .max(16, 'Hasło powinno mieć co najwyżej 16 znaków')
-    .required('To pole jest wymagane'),
+    .min(5, 'validation.password-min')
+    .max(16, 'validation.password-max')
+    .required('validation.required'),
   repeatPassword: yup
     .string()
-    .required('To pole jest wymagane')
-    .oneOf([yup.ref('password')], 'Hasła nie pasują do siebie'),
+    .required('validation.required')
+    .oneOf([yup.ref('password')], 'validation.password-no-match'),
 });
 
 const CameraRegisterPage = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const [code, setCode] = useState<string>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,7 +50,7 @@ const CameraRegisterPage = () => {
   const onSubmit = async (cameraRRInput: CameraRegisterRepeatedInput) => {
     const { repeatedPassword, ...cameraRInput } = cameraRRInput;
     try {
-      setError('');
+      setError(null);
       await register(cameraRInput);
       navigate('/dashboard');
     } catch (err: any) {
@@ -61,31 +61,47 @@ const CameraRegisterPage = () => {
   return (
     <>
       {code && !isModalOpen && (
-        <ContentWrapper>
-          <ContentBody>
-            <CameraCodeBox code={code} />
-          </ContentBody>
-        </ContentWrapper>
+        <Container>
+          <Card>
+            <CardContent>
+              <CameraCodeBox code={code} />
+            </CardContent>
+          </Card>
+        </Container>
       )}
-      <ContentWrapper>
+      <Container>
         <Form validationSchema={registerValidationSchema} onSubmit={onSubmit}>
-          <FormTitle>Zarejestruj nową kamerę</FormTitle>
-          <FormFields>
-            <TextField label="Nazwa kamery" name="name" multiline required />
-            <PasswordField label="Hasło" name="password" required />
-            <PasswordField label="Powtórz hasło" name="repeatPassword" required />
-          </FormFields>
-          <FormActions>
-            <Button type="submit" variant="contained" size="large">
-              Zarejestruj kamerę
-            </Button>
-          </FormActions>
-          <FormLink prefix="Chcesz dodać istniejącą kamerę?" text="Dodaj kamerę" to="/camera/add" />
+          <Card>
+            <CardContent>
+              <FormTitle>{t('camera-register.register-new')}</FormTitle>
+              <FormFields>
+                <TextField label={t('name')} name="name" multiline required />
+                <PasswordField label={t('password')} name="password" required />
+                <PasswordField label={t('repeat-password')} name="repeatPassword" required />
+              </FormFields>
+              <CardActions>
+                <Button type="submit" variant="contained" size="large">
+                  {t('camera-register.register-new')}
+                </Button>
+              </CardActions>
+            </CardContent>
+            <FormLink
+              prefix={t('camera-register.add-existing')}
+              text={t('camera-register.add')}
+              to="/camera/add"
+            />
+          </Card>
         </Form>
-      </ContentWrapper>
-      <ContentWrapper>{error && <ErrorAlert error={error} />}</ContentWrapper>
+      </Container>
+      <Container>{error && <ErrorAlert error={error} />}</Container>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        {!!code && <CameraCodeBox code={code} />}
+        {!!code && (
+          <Card>
+            <CardContent>
+              <CameraCodeBox code={code} />
+            </CardContent>
+          </Card>
+        )}
       </Modal>
     </>
   );

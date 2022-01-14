@@ -1,10 +1,12 @@
 import { TextField as MaterialTextField, Theme } from '@mui/material';
 import { styled } from '@mui/system';
 import { useField } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   label: string;
   name: string;
+  value?: string;
   multiline?: boolean;
   required?: boolean;
 }
@@ -13,8 +15,9 @@ interface GenericProps extends Props {
   type: 'text' | 'password';
 }
 
-const Field = ({ label, name, type, multiline, required }: GenericProps) => {
-  const { input, meta } = useField(name);
+const Field = ({ label, name, type, value, multiline, required }: GenericProps) => {
+  const { t } = useTranslation();
+  const { input, meta } = useField(name, { defaultValue: value });
   return (
     <FieldWrapper
       type={type}
@@ -25,7 +28,7 @@ const Field = ({ label, name, type, multiline, required }: GenericProps) => {
       onBlur={input.onBlur}
       onFocus={input.onFocus}
       error={meta.touched && !!meta.error}
-      helperText={meta.touched && meta.error}
+      helperText={meta.touched && t(meta.error?.message, meta.error?.data)}
       variant="filled"
       color="secondary"
       multiline={multiline}
@@ -35,13 +38,29 @@ const Field = ({ label, name, type, multiline, required }: GenericProps) => {
   );
 };
 
-export const TextField = ({ label, name, multiline, required }: Props) => {
-  return <Field label={label} name={name} type="text" multiline={multiline} required={required} />;
+export const TextField = ({ label, name, value, multiline, required }: Props) => {
+  return (
+    <Field
+      label={label}
+      name={name}
+      value={value}
+      type="text"
+      multiline={multiline}
+      required={required}
+    />
+  );
 };
 
-export const PasswordField = ({ label, name, multiline, required }: Props) => {
+export const PasswordField = ({ label, name, value, multiline, required }: Props) => {
   return (
-    <Field label={label} name={name} type="password" multiline={multiline} required={required} />
+    <Field
+      label={label}
+      name={name}
+      value={value}
+      type="password"
+      multiline={multiline}
+      required={required}
+    />
   );
 };
 

@@ -7,9 +7,13 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+import { useTranslation } from 'react-i18next';
+>>>>>>> a33584cf79f4ff0a110f6fa055fddbc77a15698d
 
-import ContentBody from 'components/common/ContentBody';
+import Card, { CardContent } from 'components/Card';
 
 import { Camera } from '../model';
 import { OwnedCameraAction, UsedCameraAction } from './CameraAction';
@@ -33,7 +37,7 @@ export const OwnedCameraList = ({ cameras }: Props) => {
             </Typography>
           </ListItemText>
           <CameraItemSecondaryAction>
-            <OwnedCameraAction id={camera._id} />
+            <OwnedCameraAction id={camera._id} name={camera.name} />
           </CameraItemSecondaryAction>
         </ListItem>
       ))}
@@ -56,7 +60,7 @@ export const UsedCameraList = ({ cameras }: Props) => {
             </Typography>
           </ListItemText>
           <CameraItemSecondaryAction>
-            <UsedCameraAction id={camera._id} />
+            <UsedCameraAction id={camera._id} name={camera.name} />
           </CameraItemSecondaryAction>
         </ListItem>
       ))}
@@ -65,12 +69,15 @@ export const UsedCameraList = ({ cameras }: Props) => {
 };
 
 const NoData = () => {
+  const { t } = useTranslation();
   return (
-    <ContentBody>
-      <Typography align="center" component="p">
-        Nie masz jeszcze żadnych kamer
-      </Typography>
-    </ContentBody>
+    <Card>
+      <CardContent>
+        <Typography align="center" component="p">
+          {t('dashboard.list.no-cameras')}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 

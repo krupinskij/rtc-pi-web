@@ -1,7 +1,8 @@
 import ModalUnstyled from '@mui/base/ModalUnstyled';
-import { Card, CardContent } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
+
+import Container from 'components/common/Container';
 
 interface Props {
   open: boolean;
@@ -11,9 +12,7 @@ interface Props {
 const Modal: React.FC<Props> = ({ children, open, onClose }) => {
   return (
     <ModalWrapper open={open} onClose={onClose} BackdropComponent={Backdrop} disableEnforceFocus>
-      <ModalContent elevation={12}>
-        <CardContent>{children}</CardContent>
-      </ModalContent>
+      <Container size="middle">{children}</Container>
     </ModalWrapper>
   );
 };
@@ -30,11 +29,6 @@ const ModalWrapper = styled(ModalUnstyled)`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const ModalContent = styled(Card)`
-  width: clamp(450px, 50%, 750px);
-  margin: auto;
 `;
 
 const Backdrop = styled('div')`
