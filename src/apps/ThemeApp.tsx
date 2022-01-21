@@ -1,7 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/system';
-import { ThemeMode } from 'model';
 import React, { useMemo, useState } from 'react';
+
+import { StorageKey, ThemeMode } from 'model';
 
 const baseTheme = createTheme({
   palette: {
@@ -67,7 +68,7 @@ export const ThemeModeContext = React.createContext({
 
 const ThemeApp: React.FC = ({ children }) => {
   const [mode, setMode] = useState<ThemeMode>(
-    (localStorage.getItem('themeMode') as ThemeMode) || ThemeMode.Dark
+    (localStorage.getItem(StorageKey.ThemeMode) as ThemeMode) || ThemeMode.Dark
   );
   const themeMode = useMemo(
     () => ({
@@ -75,7 +76,7 @@ const ThemeApp: React.FC = ({ children }) => {
       toggleThemeMode: () => {
         setMode((prevMode) => {
           const mode = prevMode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark;
-          localStorage.setItem('themeMode', mode);
+          localStorage.setItem(StorageKey.ThemeMode, mode);
 
           return mode;
         });
