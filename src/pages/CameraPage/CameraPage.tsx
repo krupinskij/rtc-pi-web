@@ -9,11 +9,11 @@ const CameraPage = () => {
   const params = useParams();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const {} = useWebRTC(params.id || '', videoRef);
+  useWebRTC(params.id || '', videoRef);
 
   return (
     <>
-      <video ref={videoRef} autoPlay playsInline />;
+      <video ref={videoRef} controls autoPlay></video>;
       <Container size="large">
         <Card>
           <CardContent>{params.id}</CardContent>
